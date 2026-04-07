@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YOUR NAME Laboratory</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-dark:    #0d1117;
+      --bg-card:    #161b22;
+      --accent:     #58a6ff;
+      --accent2:    #3fb950;
+      --text-main:  #e6edf3;
+      --text-muted: #8b949e;
+      --border:     #30363d;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 1.25rem;
+      color: var(--text-main); text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.9rem; font-weight: 600; letter-spacing: 0.04em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 4rem 5%;
+      background: radial-gradient(ellipse at 60% 40%, rgba(88,166,255,0.08) 0%, transparent 65%),
+                  radial-gradient(ellipse at 30% 70%, rgba(63,185,80,0.06) 0%, transparent 60%),
+                  var(--bg-dark);
+    }
+    .hero-label {
+      font-size: 0.8rem; letter-spacing: 0.18em; font-weight: 600;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 700; line-height: 1.2;
+      margin-bottom: 0.4rem;
+    }
+    .hero h1 .highlight { color: var(--accent); }
+    .hero-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--text-muted); margin: 1.2rem 0 2.4rem;
+      max-width: 680px;
+    }
+    .hero-acronym {
+      display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
+      margin-bottom: 2.8rem;
+    }
+    .hero-acronym span {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--text-muted);
+    }
+    .hero-acronym span b { color: var(--accent); }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem;
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0d1117;
+    }
+    .btn-primary:hover { background: #79c0ff; }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      margin-left: 0.8rem;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 6rem 5%; }
+    .section-label {
+      font-size: 0.75rem; letter-spacing: 0.16em; font-weight: 700;
+      color: var(--accent); text-transform: uppercase; margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .section-body {
+      color: var(--text-muted); max-width: 760px; font-size: 1rem;
+    }
+    .divider {
+      width: 48px; height: 3px;
+      background: var(--accent); border-radius: 2px;
+      margin: 1rem 0 2.4rem;
+    }
+
+    /* ── OVERVIEW ── */
+    #overview { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    #overview .inner {
+      max-width: 900px; margin: 0 auto; text-align: center;
+    }
+    #overview .section-body { margin: 0 auto; }
+
+    /* ── RESEARCH CARDS ── */
+    #research { background: var(--bg-dark); }
+    #research .inner { max-width: 1100px; margin: 0 auto; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.6rem;
+      margin-top: 2.4rem;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: border-color .25s, transform .25s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .card-icon {
+      font-size: 2rem; margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--accent); margin-bottom: 0.6rem;
+    }
+    .card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ── PUBLICATIONS ── */
+    #publications { background: var(--bg-card); border-top: 1px solid var(--border); }
+    #publications .inner { max-width: 900px; margin: 0 auto; }
+    .pub-list { list-style: none; margin-top: 1.6rem; }
+    .pub-list li {
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.93rem; color: var(--text-muted);
+    }
+    .pub-list li:last-child { border-bottom: none; }
+    .pub-list .pub-title {
+      font-weight: 600; color: var(--text-main);
+      display: block; margin-bottom: 0.3rem;
+    }
+    .pub-list .pub-authors { font-size: 0.86rem; }
+    .pub-list .pub-journal {
+      color: var(--accent2); font-style: italic; font-size: 0.86rem;
+    }
+    .pub-year {
+      display: inline-block;
+      background: rgba(88,166,255,0.12);
+      color: var(--accent);
+      font-size: 0.75rem; font-weight: 700;
+      padding: 0.1rem 0.55rem;
+      border-radius: 4px; margin-left: 0.5rem;
+    }
+
+    /* ── TEAM ── */
+    #team { background: var(--bg-dark); }
+    #team .inner { max-width: 1100px; margin: 0 auto; }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2rem;
+    }
+    .member {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.6rem 1rem;
+      text-align: center;
+      transition: border-color .25s;
+    }
+    .member:hover { border-color: var(--accent); }
+    .member-avatar {
+      width: 72px; height: 72px;
+      background: var(--border);
+      border-radius: 50%;
+      margin: 0 auto 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      overflow: hidden;
+    }
+    .member-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .member h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .member p { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg-card); border-top: 1px solid var(--border); }
+    #contact .inner {
+      max-width: 680px; margin: 0 auto; text-align: center;
+    }
+    .contact-info { margin-top: 1.6rem; }
+    .contact-info p { color: var(--text-muted); margin-bottom: 0.6rem; font-size: 0.95rem; }
+    .contact-info a { color: var(--accent); text-decoration: none; }
+    .contact-info a:hover { text-decoration: underline; }
+    .social-links { margin-top: 1.4rem; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+    .social-links a {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--text-muted); text-decoration: none;
+      transition: all .2s;
+    }
+    .social-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 5%;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .nav-links { gap: 1rem; }
+      .btn-outline { margin-left: 0; margin-top: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><span>YOUR</span> NAME Lab</a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Laboratory of · · ·</p>
+  <h1><span class="highlight">YOUR NAME</span><br>Laboratory</h1>
+  <div class="hero-acronym">
+    <span><b>E</b>volution</span>
+    <span><b>C</b>haracterization</span>
+    <span><b>T</b>herapeutics</span>
+  </div>
+  <p class="hero-subtitle">
+    One-line tagline describing the overarching mission of your lab.
+    Replace this with your lab's focus statement.
+  </p>
+  <div>
+    <a href="#overview" class="btn btn-primary">Learn More</a>
+    <a href="#contact" class="btn btn-outline">Contact Us</a>
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="inner">
+    <p class="section-label">Research Interests Overview</p>
+    <h2 class="section-title">Decoding [Key Phenomenon] to [Impact Statement]</h2>
+    <div class="divider" style="margin: 1rem auto 2rem;"></div>
+    <p class="section-body">
+      Replace this paragraph with your lab's research overview. Describe the central questions
+      your team addresses, the methodological framework you employ (computational, experimental,
+      or integrative), and the broader scientific or public health significance of your work.
+      Keep it to 3–5 sentences for readability.
+    </p>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="inner">
+    <p class="section-label">Research Areas</p>
+    <h2 class="section-title">Core Research Directions</h2>
+    <div class="divider"></div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">🔬</div>
+        <h3>Research Area 1 — Evolution</h3>
+        <p>
+          Describe the first major research direction. What biological or computational questions
+          does this thrust address? What tools or servers has your team developed?
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🧬</div>
+        <h3>Research Area 2 — Characterization</h3>
+        <p>
+          Describe the second research direction. Which model organisms, pathogens, or cell types
+          are studied? What phenotypic or molecular assays are employed?
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💊</div>
+        <h3>Research Area 3 — Therapeutics</h3>
+        <p>
+          Describe translational or drug-discovery efforts. What pipeline (e.g., virtual screening,
+          structure-based design) does your team use? What are the target classes?
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="inner">
+    <p class="section-label">Selected Publications</p>
+    <h2 class="section-title">Recent Work</h2>
+    <div class="divider"></div>
+    <ul class="pub-list">
+
+      <li>
+        <span class="pub-title">
+          Title of Publication One: A Comprehensive Study of [Topic]
+          <span class="pub-year">2024</span>
+        </span>
+        <span class="pub-authors">Author A, <strong>Your Name</strong>, Author B, Author C</span><br/>
+        <span class="pub-journal">Journal Name, Volume(Issue):Pages</span>
+      </li>
+
+      <li>
+        <span class="pub-title">
+          Title of Publication Two: Mechanistic Insights into [Topic]
+          <span class="pub-year">2023</span>
+        </span>
+        <span class="pub-authors">Author D, Author E, <strong>Your Name</strong></span><br/>
+        <span class="pub-journal">Journal Name, Volume(Issue):Pages</span>
+      </li>
+
+      <li>
+        <span class="pub-title">
+          Title of Publication Three: Development of [Method/Tool]
+          <span class="pub-year">2022</span>
+        </span>
+        <span class="pub-authors"><strong>Your Name</strong>, Author F, Author G</span><br/>
+        <span class="pub-journal">Journal Name, Volume(Issue):Pages</span>
+      </li>
+
+    </ul>
+    <a href="#" class="btn btn-outline" style="margin-top:1.6rem; display:inline-block;">
+      View All Publications →
+    </a>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="inner">
+    <p class="section-label">People</p>
+    <h2 class="section-title">Our Team</h2>
+    <div class="divider"></div>
+    <div class="team-grid">
+
+      <div class="member">
+        <div class="member-avatar">👤</div>
+        <h4>Your Name</h4>
+        <p>Principal Investigator</p>
+      </div>
+
+      <div class="member">
+        <div class="member-avatar">👤</div>
+        <h4>Team Member Name</h4>
+        <p>PhD Student</p>
+      </div>
+
+      <div class="member">
+        <div class="member-avatar">👤</div>
+        <h4>Team Member Name</h4>
+        <p>Postdoctoral Researcher</p>
+      </div>
+
+      <div class="member">
+        <div class="member-avatar">👤</div>
+        <h4>Team Member Name</h4>
+        <p>Research Associate</p>
+      </div>
+
+      <!-- We are hiring -->
+      <div class="member" style="border-style: dashed; border-color: var(--accent);">
+        <div class="member-avatar" style="background:rgba(88,166,255,0.1); color:var(--accent);">+</div>
+        <h4 style="color:var(--accent);">We Are Hiring</h4>
+        <p>Open positions in the lab</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="divider" style="margin: 1rem auto 1.6rem;"></div>
+    <div class="contact-info">
+      <p>📧 <a href="mailto:yourname@university.edu">yourname@university.edu</a></p>
+      <p>🏛️ Department of [Your Department], [Your University]</p>
+      <p>📍 Building Name, Room Number, City, State/Country</p>
+    </div>
+    <div class="social-links">
+      <a href="#">GitHub</a>
+      <a href="#">Google Scholar</a>
+      <a href="#">PubMed</a>
+      <a href="#">Twitter / X</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Your Name Laboratory · [University Name] · Built with GitHub Pages</p>
+</footer>
+
+</body>
+</html>
