@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EquiGen Lab</title>
+  <title>BRIDGE Lab</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
       --bg-dark:#0d1117; --bg-card:#161b22;
-      --accent:#58a6ff;   /* blue  = Equitable */
-      --accent2:#3fb950;  /* green = Genomics  */
-      --accent3:#f0883e;  /* orange= Statistical Methods */
+      --accent:#58a6ff;
+      --accent2:#3fb950;
+      --accent3:#f0883e;
       --text-main:#e6edf3; --text-muted:#8b949e; --border:#30363d; --nav-h:64px;
     }
     body.theme-slate  { --bg-dark:#0f1923; --bg-card:#182433; --accent:#7eb8f7; --accent2:#4ec9a0; --accent3:#f0a05a; --text-main:#dce8f5; --text-muted:#7a9bb5; --border:#243650; }
@@ -19,16 +19,8 @@
     body.theme-warm   { --bg-dark:#16100a; --bg-card:#201610; --accent:#f0a05a; --accent2:#e8c96a; --accent3:#d96060; --text-main:#f5ede0; --text-muted:#a08060; --border:#3a2a18; }
     body.theme-purple { --bg-dark:#0e0d1a; --bg-card:#161428; --accent:#a78bfa; --accent2:#60c8f0; --accent3:#f472b6; --text-main:#e8e4f8; --text-muted:#8b80b8; --border:#2d2850; }
 
-    /* ── scroll snap ── */
-    html {
-      scroll-snap-type: y proximity;
-    }
-    body {
-      font-family:'Open Sans',sans-serif;
-      background:var(--bg-dark); color:var(--text-main);
-      line-height:1.7; overflow-x:hidden;
-      transition:background .4s,color .4s;
-    }
+    html { scroll-snap-type:y proximity; }
+    body { font-family:'Open Sans',sans-serif; background:var(--bg-dark); color:var(--text-main); line-height:1.7; overflow-x:hidden; transition:background .4s,color .4s; }
 
     /* NAV */
     nav {
@@ -38,8 +30,9 @@
       display:flex; align-items:center; justify-content:space-between; padding:0 4%;
     }
     .nav-logo { font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.2rem; color:var(--text-main); cursor:pointer; user-select:none; }
-    .nav-logo .eq  { color:var(--accent); }
-    .nav-logo .gen { color:var(--accent2); }
+    .nav-logo .br  { color:var(--accent); }
+    .nav-logo .idge { color:var(--accent2); }
+    .nav-logo-sub { font-size:0.62rem; font-weight:400; color:var(--text-muted); letter-spacing:0.04em; display:block; margin-top:-2px; }
     .nav-right { display:flex; align-items:center; gap:0.4rem; }
     .nav-links { display:flex; gap:0.2rem; list-style:none; }
     .nav-links button {
@@ -59,19 +52,13 @@
     .theme-dot[data-theme="purple"]  { background:linear-gradient(135deg,#a78bfa,#f472b6); }
 
     /* SECTIONS */
-    section {
-      min-height:100vh;
-      display:flex; flex-direction:column;
-      padding-top:var(--nav-h);
-      scroll-snap-align: start;
-    }
+    section { min-height:100vh; display:flex; flex-direction:column; padding-top:var(--nav-h); scroll-snap-align:start; }
     #overview     { background:var(--bg-card); border-top:1px solid var(--border); }
     #research     { background:var(--bg-dark); border-top:1px solid var(--border); }
     #publications { background:var(--bg-card); border-top:1px solid var(--border); }
     #about        { background:var(--bg-dark); border-top:1px solid var(--border); }
     #contact      { background:var(--bg-card); border-top:1px solid var(--border); }
 
-    /* ① 위쪽 여백 줄임: 4.5rem → 2.5rem */
     .sec-inner { max-width:960px; width:100%; margin:0 auto; padding:2.5rem 2rem 4rem; flex:1; }
     .sec-inner.wide { max-width:1080px; }
     .section-label { font-size:0.72rem; letter-spacing:0.16em; font-weight:700; color:var(--accent); text-transform:uppercase; margin-bottom:0.5rem; }
@@ -81,27 +68,39 @@
 
     /* HOME */
     #home {
-      align-items:center; justify-content:center; text-align:center; padding:4rem 6% 4rem;
+      align-items:center; justify-content:center; text-align:center; padding:4rem 6%;
       background:
         radial-gradient(ellipse at 65% 35%, rgba(88,166,255,0.11) 0%, transparent 60%),
         radial-gradient(ellipse at 25% 70%, rgba(63,185,80,0.08) 0%, transparent 55%),
         var(--bg-dark);
     }
-    #home h1 { font-family:'Montserrat',sans-serif; font-size:clamp(2.4rem,5.5vw,4rem); font-weight:700; line-height:1.12; margin-bottom:1rem; }
-    /* ③ 색상 통일: Equitable=blue, Genomic=green */
-    .hero-eq  { color:var(--accent); }   /* blue */
-    .hero-gen { color:var(--accent2); }  /* green */
-    .hero-sub { max-width:640px; margin:0 auto 2rem; color:var(--text-muted); font-size:1.02rem; line-height:1.8; }
+    .hero-labname {
+      font-family:'Montserrat',sans-serif;
+      font-size:clamp(3rem,8vw,6rem);
+      font-weight:700; line-height:1; margin-bottom:0.5rem; letter-spacing:0.04em;
+    }
+    .hero-labname .br   { color:var(--accent); }
+    .hero-labname .idge { color:var(--accent2); }
+    .hero-fullname {
+      font-size:0.85rem; color:var(--text-muted); letter-spacing:0.12em;
+      margin-bottom:1.8rem; font-weight:400;
+    }
+    .hero-fullname b { color:var(--text-main); }
+    .hero-tagline {
+      font-family:'Montserrat',sans-serif;
+      font-size:clamp(1.1rem,2.5vw,1.6rem);
+      font-weight:600; line-height:1.3; margin-bottom:1rem;
+    }
+    .hero-eq  { color:var(--accent); }
+    .hero-met { color:var(--accent3); }
+    .hero-gen { color:var(--accent2); }
+    .hero-sub { max-width:640px; margin:0 auto 2rem; color:var(--text-muted); font-size:0.98rem; line-height:1.8; }
     .hero-sub strong { color:var(--text-main); }
 
-    /* ③ 배지 색상 통일 */
-    .pill-row { display:flex; gap:0.7rem; flex-wrap:wrap; justify-content:center; margin-bottom:2.8rem; }
-    .pill { border-radius:99px; padding:0.32rem 1rem; font-size:0.82rem; font-weight:700; }
-    /* Statistical Methods = orange */
+    .pill-row { display:flex; gap:0.7rem; flex-wrap:wrap; justify-content:center; margin-bottom:2.4rem; }
+    .pill { border-radius:99px; padding:0.3rem 1rem; font-size:0.8rem; font-weight:700; }
     .pill.orange { background:rgba(240,136,62,0.15); border:1px solid rgba(240,136,62,0.5); color:var(--accent3); }
-    /* Medical Genomics = green */
     .pill.green  { background:rgba(63,185,80,0.15);  border:1px solid rgba(63,185,80,0.5);  color:var(--accent2); }
-    /* Equitable AI = blue */
     .pill.blue   { background:rgba(88,166,255,0.12); border:1px solid rgba(88,166,255,0.4); color:var(--accent); }
 
     .btn { display:inline-block; padding:0.72rem 1.8rem; border-radius:8px; font-weight:600; font-size:0.92rem; cursor:pointer; transition:all .2s; font-family:'Open Sans',sans-serif; border:none; text-decoration:none; }
@@ -117,23 +116,19 @@
     .overview-future { font-size:0.97rem; color:var(--text-muted); line-height:1.9; }
     .overview-future strong { color:var(--accent3); }
 
-    /* RESEARCH CARDS — ③ 색상 통일 */
+    /* RESEARCH */
     .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.4rem; }
     .card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.8rem; transition:border-color .25s,transform .25s; }
     .card:hover { transform:translateY(-4px); }
-    /* Statistical Methods = orange */
     .card.c-orange { border-color:rgba(240,136,62,0.35); }
     .card.c-orange:hover { border-color:var(--accent3); }
     .card.c-orange h3 { color:var(--accent3); }
-    /* Medical Genomics = green */
     .card.c-green  { border-color:rgba(63,185,80,0.3); }
     .card.c-green:hover  { border-color:var(--accent2); }
     .card.c-green h3  { color:var(--accent2); }
-    /* Equitable AI = blue, dashed */
     .card.c-blue { border-style:dashed; border-color:rgba(88,166,255,0.4); }
     .card.c-blue:hover { border-color:var(--accent); }
     .card.c-blue h3 { color:var(--accent); }
-
     .card-icon { font-size:1.9rem; margin-bottom:0.8rem; }
     .card h3 { font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem; }
     .card p { font-size:0.87rem; color:var(--text-muted); line-height:1.75; }
@@ -207,9 +202,12 @@
 <body>
 
 <nav>
-  <span class="nav-logo" onclick="navTo('home')">
-    <span class="eq">Equi</span><span class="gen">Gen</span> Lab
-  </span>
+  <div>
+    <span class="nav-logo" onclick="navTo('home')">
+      <span class="br">BRI</span><span class="idge">DGE</span> Lab
+    </span>
+    <span class="nav-logo-sub">Biostatistics &amp; Research for Inclusive Diverse Genomic Equity</span>
+  </div>
   <div class="nav-right">
     <ul class="nav-links">
       <li><button onclick="navTo('overview')"     id="btn-overview">Overview</button></li>
@@ -230,7 +228,14 @@
 
 <!-- HOME -->
 <section id="home">
-  <h1><span class="hero-eq">Equitable</span> AI<br/>for <span class="hero-gen">Genomic</span> Medicine</h1>
+  <div class="hero-labname"><span class="br">BRI</span><span class="idge">DGE</span></div>
+  <div class="hero-fullname">
+    <b>B</b>iostatistics and <b>R</b>esearch for <b>I</b>nclusive <b>D</b>iverse <b>G</b>enomic <b>E</b>quity
+  </div>
+  <div class="hero-tagline">
+    <span class="hero-eq">Equitable</span> <span class="hero-met">Methods</span>
+    for <span class="hero-gen">Genomic</span> Medicine
+  </div>
   <div class="pill-row">
     <span class="pill orange">Statistical Methods</span>
     <span class="pill green">Medical Genomics</span>
@@ -252,7 +257,7 @@
 <section id="overview">
   <div class="sec-inner">
     <p class="section-label">Overview</p>
-    <h2 class="section-title">From Population Genomics<br/>to Bias-Aware Machine Learning</h2>
+    <h2 class="section-title">Bridging <span style="color:var(--accent2)">Genomics</span> and <span style="color:var(--accent)">Equitable</span> Science</h2>
     <div class="divider"></div>
     <p class="overview-lead">
       Our research sits at the intersection of
@@ -274,7 +279,7 @@
       We aim to build debiasing frameworks that close this gap.
     </p>
   </div>
-  <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <!-- RESEARCH -->
@@ -309,7 +314,7 @@
       </div>
     </div>
   </div>
-  <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <!-- PUBLICATIONS -->
@@ -326,48 +331,66 @@
     </p>
     <ul class="pub-list">
       <li>
-        <span class="pub-title">COBRA: Cell-type-specific Orthogonal Batch effect Removal Algorithm in single cell RNA-sequencing data <span class="pub-badge rev">Revision Invited</span><span class="pub-badge corr">Corresponding</span></span>
+        <span class="pub-title">COBRA: Cell-type-specific Orthogonal Batch effect Removal Algorithm in single cell RNA-sequencing data
+          <span class="pub-badge rev">Revision Invited</span><span class="pub-badge corr">Corresponding</span>
+        </span>
         Seo S, Won S†, <span class="pub-me">Park K†</span><br/>
         <span class="pub-journal">Under Review</span>
       </li>
       <li>
-        <span class="pub-title">Comparative Transcriptomic Profiling of Mesenchymal Stem Cells from Distinct Tissue Origins and Isolation Methods Highlights the Stability and Immunomodulatory Signature of Umbilical Cord-Derived Smumf Cells <span class="pub-year">2026</span><span class="pub-badge first">Co-First</span></span>
+        <span class="pub-title">Comparative Transcriptomic Profiling of Mesenchymal Stem Cells from Distinct Tissue Origins and Isolation Methods Highlights the Stability and Immunomodulatory Signature of Umbilical Cord-Derived Smumf Cells
+          <span class="pub-year">2026</span><span class="pub-badge first">Co-First</span>
+        </span>
         Lee MJ*, <span class="pub-me">Park K*</span>, Won S†, Jo CH†<br/>
         <span class="pub-journal">Tissue Engineering and Regenerative Medicine</span>
       </li>
       <li>
-        <span class="pub-title">Novel Genetic Loci for Nontuberculous Mycobacterial Pulmonary Disease and Potential Protective Effect of Body Mass Index <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span></span>
-        <span class="pub-me">Park K*</span>, Kim H*, Huh HJ* et al., Won S†, Jhun BW†, Won HH†<br/>
+        <span class="pub-title">Novel Genetic Loci for Nontuberculous Mycobacterial Pulmonary Disease and Potential Protective Effect of Body Mass Index
+          <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span>
+        </span>
+        <span class="pub-me">Park K*</span>, Kim H*, Huh HJ*, Namkoong H, Hasegawa N, Nishimura T, Asakura T, Morimoto K, Kurashima A, Omae Y, Kawai Y, Tokunaga K, Cho J, Yim JJ, Won S†, Jhun BW†, Won HH†<br/>
         <span class="pub-journal">American Journal of Respiratory and Critical Care Medicine</span>
       </li>
       <li>
-        <span class="pub-title">rs762855 Single Nucleotide Polymorphism Modulates the Risk for Diffuse-Type Gastric Cancer in Females: A Genome-Wide Association Study in the Korean Population <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span></span>
-        <span class="pub-me">Park K*</span>, Shin CM* et al., Kim N†<br/>
+        <span class="pub-title">rs762855 Single Nucleotide Polymorphism Modulates the Risk for Diffuse-Type Gastric Cancer in Females: A Genome-Wide Association Study in the Korean Population
+          <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span>
+        </span>
+        <span class="pub-me">Park K*</span>, Shin CM*, Song CH, Ohn JH, Lee S, Park JH, Yie GE, Kang SJ, Kim JS, Lee DH, Kim N†<br/>
         <span class="pub-journal">Gastric Cancer</span>
       </li>
       <li>
-        <span class="pub-title">Single-Cell RNA Sequencing Reveals Transcriptional Changes in Circulating Immune Cells from Patients with Severe Asthma Induced by Biologics <span class="pub-year">2024</span><span class="pub-badge first">Co-First</span></span>
-        <span class="pub-me">Park K*</span>, Lee JH* et al., Lee JS†, Won S†, Kim TB†<br/>
+        <span class="pub-title">Single-Cell RNA Sequencing Reveals Transcriptional Changes in Circulating Immune Cells from Patients with Severe Asthma Induced by Biologics
+          <span class="pub-year">2024</span><span class="pub-badge first">Co-First</span>
+        </span>
+        <span class="pub-me">Park K*</span>, Lee JH*, Shin E, Jang HY, Song WJ, Kwon HS, Cho YS, Lee JE, Adcock I, Chung KF, Lee JS†, Won S†, Kim TB†<br/>
         <span class="pub-journal">Experimental &amp; Molecular Medicine</span>
       </li>
       <li>
-        <span class="pub-title">Genome-Wide Association Study Implicates the Role of TBXAS1 in the Pathogenesis of Depressive Symptoms among the Korean Population <span class="pub-year">2024</span></span>
-        <span class="pub-me">Park K</span>, Do AR, Chung Y et al., Kim HN†, Ahn YM†, Won S†<br/>
+        <span class="pub-title">Genome-Wide Association Study Implicates the Role of TBXAS1 in the Pathogenesis of Depressive Symptoms among the Korean Population
+          <span class="pub-year">2024</span>
+        </span>
+        <span class="pub-me">Park K</span>, Do AR, Chung Y, Kim MJ, Rhee SJ, Yoon DH, Choi SH, Cho SJ, Kim HN†, Ahn YM†, Won S†<br/>
         <span class="pub-journal">Translational Psychiatry</span>
       </li>
       <li>
-        <span class="pub-title">rs2671655 Single Nucleotide Polymorphism Modulates the Risk for Gastric Cancer in Helicobacter pylori-Infected Individuals: A Genome-Wide Association Study in the Korean Population <span class="pub-year">2022</span><span class="pub-badge first">Co-First</span></span>
-        Shin CM*, <span class="pub-me">Park K*</span>, Kim N† et al.<br/>
+        <span class="pub-title">rs2671655 Single Nucleotide Polymorphism Modulates the Risk for Gastric Cancer in Helicobacter pylori-Infected Individuals: A Genome-Wide Association Study in the Korean Population
+          <span class="pub-year">2022</span><span class="pub-badge first">Co-First</span>
+        </span>
+        Shin CM*, <span class="pub-me">Park K*</span>, Ohn JH, Lee S, Park JH, Kang SJ, Kim JS, Lee DH, Kim N†<br/>
         <span class="pub-journal">Gastric Cancer</span>
       </li>
       <li>
-        <span class="pub-title">Genome-Wide Association Study of Non-Tuberculous Mycobacterial Pulmonary Disease <span class="pub-year">2021</span><span class="pub-badge first">Co-First</span></span>
-        Cho J*, <span class="pub-me">Park K*</span> et al., Won S†, Yim JJ†<br/>
+        <span class="pub-title">Genome-Wide Association Study of Non-Tuberculous Mycobacterial Pulmonary Disease
+          <span class="pub-year">2021</span><span class="pub-badge first">Co-First</span>
+        </span>
+        Cho J*, <span class="pub-me">Park K*</span>, Choi SM, Lee J, Lee CH, Lee JK, Heo EY, Kim DK, Lee YJ, Park JS, Cho YJ, Yoon HI, Lee JH, Lee CT, Kim N, Choi KY, Lee KH, Sung J, Won S†, Yim JJ†<br/>
         <span class="pub-journal">Thorax</span>
       </li>
       <li>
-        <span class="pub-title">BALLI: Bartlett-Adjusted Likelihood-Based Linear Model Approach for Identifying Differentially Expressed Genes with RNA-seq Data <span class="pub-year">2019</span></span>
-        <span class="pub-me">Park K</span>, An J, Gim J et al., Won S†<br/>
+        <span class="pub-title">BALLI: Bartlett-Adjusted Likelihood-Based Linear Model Approach for Identifying Differentially Expressed Genes with RNA-seq Data
+          <span class="pub-year">2019</span>
+        </span>
+        <span class="pub-me">Park K</span>, An J, Gim J, Seo M, Lee W, Park T, Won S†<br/>
         <span class="pub-journal">BMC Genomics</span>
       </li>
     </ul>
@@ -376,7 +399,7 @@
       📄 &nbsp; View Full Publication List on Google Scholar →
     </a>
   </div>
-  <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <!-- ABOUT -->
@@ -447,7 +470,7 @@
       <li><span class="lbl">10-2883401 · Korea · 2025</span>Single nucleotide polymorphisms for the diagnosis of depression and uses thereof</li>
     </ul>
   </div>
-  <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <!-- CONTACT -->
@@ -472,13 +495,12 @@
       <strong>We are actively recruiting motivated MS and PhD students.</strong>
     </div>
   </div>
-  <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <script>
   const ids = ['home','overview','research','publications','about','contact'];
 
-  /* ── 1. Nav click scroll ── */
   function navTo(id) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -487,7 +509,6 @@
     window.scrollTo({ top, behavior:'smooth' });
   }
 
-  /* ── 2. Active nav via IntersectionObserver ── */
   function setActive(id) {
     ids.forEach(s => { const b = document.getElementById('btn-'+s); if(b) b.classList.remove('active'); });
     const ab = document.getElementById('btn-'+id);
@@ -499,18 +520,10 @@
   }, { threshold: 0.3 });
   ids.forEach(id => { const el = document.getElementById(id); if(el) obs.observe(el); });
 
-  /* ── 3. Auto-scroll to next section on wheel ──
-     Fires when user scrolls DOWN past 70% of the current section,
-     or UP past 30%. Short debounce prevents double-fire.           */
   let scrollLock = false;
-
   window.addEventListener('wheel', (e) => {
     if (scrollLock) return;
-
     const navH = document.querySelector('nav').offsetHeight;
-    const vy   = window.pageYOffset;
-
-    // find current section
     let cur = null;
     for (const id of ids) {
       const el = document.getElementById(id);
@@ -519,26 +532,21 @@
       if (rect.top <= navH + 10 && rect.bottom > navH + 10) { cur = id; break; }
     }
     if (!cur) return;
-
     const curEl  = document.getElementById(cur);
     const curIdx = ids.indexOf(cur);
     const rect   = curEl.getBoundingClientRect();
-    const visibleRatio = (window.innerHeight - navH - Math.max(rect.top - navH, 0)) / curEl.offsetHeight;
-
-    if (e.deltaY > 0 && visibleRatio > 0.72 && curIdx < ids.length - 1) {
-      // scrolled past 72% of section → jump to next
+    const scrolledPast = Math.max(0, navH - rect.top) / curEl.offsetHeight;
+    if (e.deltaY > 0 && scrolledPast > 0.80 && curIdx < ids.length - 1) {
       scrollLock = true;
       navTo(ids[curIdx + 1]);
       setTimeout(() => { scrollLock = false; }, 900);
-    } else if (e.deltaY < 0 && rect.top > navH + 10 && curIdx > 0) {
-      // scrolled back above top of section → jump to previous
+    } else if (e.deltaY < 0 && rect.top > navH + 8 && curIdx > 0) {
       scrollLock = true;
       navTo(ids[curIdx - 1]);
       setTimeout(() => { scrollLock = false; }, 900);
     }
-  }, { passive: true });
+  }, { passive:true });
 
-  /* ── 4. Theme switcher ── */
   function setTheme(theme) {
     document.body.className = theme === 'default' ? '' : 'theme-' + theme;
     document.querySelectorAll('.theme-dot').forEach(d => {
