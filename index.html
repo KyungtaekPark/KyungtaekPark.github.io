@@ -3,353 +3,254 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ParkLab</title>
+  <title>Kyungtaek Park, Ph.D.</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg-dark:    #0d1117;
-      --bg-card:    #161b22;
-      --accent:     #58a6ff;
-      --accent2:    #3fb950;
-      --text-main:  #e6edf3;
-      --text-muted: #8b949e;
-      --border:     #30363d;
+      --bg-dark:#0d1117; --bg-card:#161b22; --accent:#58a6ff; --accent2:#3fb950;
+      --text-main:#e6edf3; --text-muted:#8b949e; --border:#30363d; --nav-h:64px;
     }
+    body { font-family:'Open Sans',sans-serif; background:var(--bg-dark); color:var(--text-main); line-height:1.7; height:100vh; overflow:hidden; }
 
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Open Sans', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-main);
-      line-height: 1.7;
-    }
-
-    /* ── NAV ── */
     nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(13,17,23,0.92);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%;
-      height: 64px;
+      position:fixed; top:0; left:0; right:0; z-index:100; height:var(--nav-h);
+      background:rgba(13,17,23,0.96); backdrop-filter:blur(8px);
+      border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:space-between; padding:0 5%;
     }
-    .nav-logo {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700; font-size: 1.25rem;
-      color: var(--text-main); text-decoration: none;
+    .nav-logo { font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.15rem; color:var(--text-main); text-decoration:none; cursor:pointer; }
+    .nav-logo span { color:var(--accent); }
+    .nav-links { display:flex; gap:0.2rem; list-style:none; }
+    .nav-links button {
+      background:none; border:none; cursor:pointer; color:var(--text-muted);
+      font-size:0.88rem; font-weight:600; letter-spacing:0.04em;
+      font-family:'Open Sans',sans-serif; padding:0.45rem 1rem; border-radius:6px; transition:color .2s,background .2s;
     }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--text-muted); text-decoration: none;
-      font-size: 0.9rem; font-weight: 600; letter-spacing: 0.04em;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links button:hover { color:var(--text-main); background:rgba(255,255,255,0.05); }
+    .nav-links button.active { color:var(--accent); background:rgba(88,166,255,0.1); }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 92vh;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: 4rem 5%;
-      background: radial-gradient(ellipse at 60% 40%, rgba(88,166,255,0.08) 0%, transparent 65%),
-                  radial-gradient(ellipse at 30% 70%, rgba(63,185,80,0.06) 0%, transparent 60%),
-                  var(--bg-dark);
-    }
-    .hero-label {
-      font-size: 0.8rem; letter-spacing: 0.18em; font-weight: 600;
-      color: var(--accent); text-transform: uppercase; margin-bottom: 1rem;
-    }
-    .hero h1 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
-      font-weight: 700; line-height: 1.2;
-      margin-bottom: 0.4rem;
-    }
-    .hero h1 .highlight { color: var(--accent); }
-    .hero-subtitle {
-      font-size: clamp(0.95rem, 2vw, 1.15rem);
-      color: var(--text-muted); margin: 1.2rem 0 2.4rem;
-      max-width: 680px;
-    }
-    .hero-acronym {
-      display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;
-      margin-bottom: 2.8rem;
-    }
-    .hero-acronym span {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.4rem 1rem;
-      font-size: 0.85rem; font-weight: 600;
-      color: var(--text-muted);
-    }
-    .hero-acronym span b { color: var(--accent); }
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 2rem;
-      border-radius: 8px;
-      font-weight: 600; font-size: 0.95rem;
-      text-decoration: none;
-      transition: all .2s;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #0d1117;
-    }
-    .btn-primary:hover { background: #79c0ff; }
-    .btn-outline {
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      margin-left: 0.8rem;
-    }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .panel { display:none; position:fixed; top:var(--nav-h); left:0; right:0; bottom:0; overflow-y:auto; }
+    .panel.active { display:flex; flex-direction:column; }
 
-    /* ── SECTION COMMON ── */
-    section { padding: 6rem 5%; }
-    .section-label {
-      font-size: 0.75rem; letter-spacing: 0.16em; font-weight: 700;
-      color: var(--accent); text-transform: uppercase; margin-bottom: 0.6rem;
+    /* HOME */
+    #panel-home {
+      align-items:center; justify-content:center; text-align:center; padding:4rem 5%;
+      background:radial-gradient(ellipse at 60% 40%,rgba(88,166,255,0.09) 0%,transparent 65%),
+                 radial-gradient(ellipse at 30% 70%,rgba(63,185,80,0.06) 0%,transparent 60%),var(--bg-dark);
     }
-    .section-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .section-body {
-      color: var(--text-muted); max-width: 760px; font-size: 1rem;
-    }
-    .divider {
-      width: 48px; height: 3px;
-      background: var(--accent); border-radius: 2px;
-      margin: 1rem 0 2.4rem;
-    }
+    .hero-label { font-size:0.78rem; letter-spacing:0.18em; font-weight:700; color:var(--accent); text-transform:uppercase; margin-bottom:1rem; }
+    #panel-home h1 { font-family:'Montserrat',sans-serif; font-size:clamp(2.2rem,5vw,3.8rem); font-weight:700; line-height:1.15; margin-bottom:0.5rem; }
+    #panel-home h1 .hl { color:var(--accent); }
+    .hero-sub { font-size:clamp(0.9rem,1.8vw,1.05rem); color:var(--text-muted); max-width:660px; margin:1.2rem auto 2.4rem; }
+    .hero-badges { display:flex; gap:0.9rem; flex-wrap:wrap; justify-content:center; margin-bottom:2.6rem; }
+    .hero-badges span { background:var(--bg-card); border:1px solid var(--border); border-radius:6px; padding:0.38rem 1rem; font-size:0.83rem; font-weight:600; color:var(--text-muted); }
+    .hero-badges span b { color:var(--accent); }
+    .btn { display:inline-block; padding:0.7rem 1.8rem; border-radius:8px; font-weight:600; font-size:0.92rem; text-decoration:none; cursor:pointer; transition:all .2s; font-family:'Open Sans',sans-serif; border:none; }
+    .btn-primary { background:var(--accent); color:#0d1117; }
+    .btn-primary:hover { background:#79c0ff; }
+    .btn-outline { border:1px solid var(--border); color:var(--text-main); background:none; margin-left:0.8rem; }
+    .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
 
-    /* ── OVERVIEW ── */
-    #overview { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    #overview .inner {
-      max-width: 900px; margin: 0 auto; text-align: center;
-    }
-    #overview .section-body { margin: 0 auto; }
+    /* COMMON */
+    .panel-inner { max-width:960px; width:100%; margin:0 auto; padding:3.5rem 2rem 4rem; flex:1; }
+    .panel-inner.wide { max-width:1100px; }
+    .section-label { font-size:0.73rem; letter-spacing:0.16em; font-weight:700; color:var(--accent); text-transform:uppercase; margin-bottom:0.5rem; }
+    .section-title { font-family:'Montserrat',sans-serif; font-size:clamp(1.5rem,2.8vw,2rem); font-weight:700; margin-bottom:0.8rem; }
+    .divider { width:44px; height:3px; background:var(--accent); border-radius:2px; margin-bottom:2rem; }
+    .panel-footer { text-align:center; padding:1.2rem 5%; font-size:0.78rem; color:var(--text-muted); border-top:1px solid var(--border); flex-shrink:0; }
 
-    /* ── RESEARCH CARDS ── */
-    #research { background: var(--bg-dark); }
-    #research .inner { max-width: 1100px; margin: 0 auto; }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.6rem;
-      margin-top: 2.4rem;
-    }
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      transition: border-color .25s, transform .25s;
-    }
-    .card:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .card-icon {
-      font-size: 2rem; margin-bottom: 1rem;
-    }
-    .card h3 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 1.05rem; font-weight: 700;
-      color: var(--accent); margin-bottom: 0.6rem;
-    }
-    .card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; }
+    /* OVERVIEW */
+    #panel-overview { background:var(--bg-card); }
+    #panel-overview .panel-inner { display:flex; flex-direction:column; justify-content:center; }
+    .overview-body { color:var(--text-muted); font-size:0.97rem; max-width:780px; line-height:1.9; margin-bottom:1.2rem; }
 
-    /* ── PUBLICATIONS ── */
-    #publications { background: var(--bg-card); border-top: 1px solid var(--border); }
-    #publications .inner { max-width: 900px; margin: 0 auto; }
-    .pub-list { list-style: none; margin-top: 1.6rem; }
-    .pub-list li {
-      padding: 1.2rem 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.93rem; color: var(--text-muted);
-    }
-    .pub-list li:last-child { border-bottom: none; }
-    .pub-list .pub-title {
-      font-weight: 600; color: var(--text-main);
-      display: block; margin-bottom: 0.3rem;
-    }
-    .pub-list .pub-authors { font-size: 0.86rem; }
-    .pub-list .pub-journal {
-      color: var(--accent2); font-style: italic; font-size: 0.86rem;
-    }
-    .pub-year {
-      display: inline-block;
-      background: rgba(88,166,255,0.12);
-      color: var(--accent);
-      font-size: 0.75rem; font-weight: 700;
-      padding: 0.1rem 0.55rem;
-      border-radius: 4px; margin-left: 0.5rem;
-    }
+    /* RESEARCH */
+    #panel-research { background:var(--bg-dark); }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.4rem; }
+    .card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.8rem; transition:border-color .25s,transform .25s; }
+    .card:hover { border-color:var(--accent); transform:translateY(-4px); }
+    .card-icon { font-size:1.8rem; margin-bottom:0.9rem; }
+    .card h3 { font-family:'Montserrat',sans-serif; font-size:0.98rem; font-weight:700; color:var(--accent); margin-bottom:0.5rem; }
+    .card p { font-size:0.88rem; color:var(--text-muted); line-height:1.75; }
+    .card .tag { display:inline-block; background:rgba(88,166,255,0.1); color:var(--accent); font-size:0.72rem; font-weight:700; padding:0.1rem 0.5rem; border-radius:4px; margin-right:0.3rem; margin-bottom:0.6rem; }
+    .card .tag.green { background:rgba(63,185,80,0.1); color:var(--accent2); }
 
-    /* ── TEAM ── */
-    #team { background: var(--bg-dark); }
-    #team .inner { max-width: 1100px; margin: 0 auto; }
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.4rem;
-      margin-top: 2rem;
-    }
-    .member {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.6rem 1rem;
-      text-align: center;
-      transition: border-color .25s;
-    }
-    .member:hover { border-color: var(--accent); }
-    .member-avatar {
-      width: 72px; height: 72px;
-      background: var(--border);
-      border-radius: 50%;
-      margin: 0 auto 0.9rem;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem;
-      overflow: hidden;
-    }
-    .member-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .member h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
-    .member p { font-size: 0.8rem; color: var(--text-muted); }
+    /* PUBLICATIONS */
+    #panel-publications { background:var(--bg-card); }
+    .pub-list { list-style:none; }
+    .pub-list li { padding:1rem 0; border-bottom:1px solid var(--border); font-size:0.9rem; color:var(--text-muted); }
+    .pub-list li:last-child { border-bottom:none; }
+    .pub-title { font-weight:600; color:var(--text-main); display:block; margin-bottom:0.25rem; }
+    .pub-journal { color:var(--accent2); font-style:italic; font-size:0.84rem; }
+    .pub-year { display:inline-block; background:rgba(88,166,255,0.12); color:var(--accent); font-size:0.72rem; font-weight:700; padding:0.1rem 0.5rem; border-radius:4px; margin-left:0.4rem; }
+    .pub-me { font-weight:700; color:var(--text-main); }
 
-    /* ── CONTACT ── */
-    #contact { background: var(--bg-card); border-top: 1px solid var(--border); }
-    #contact .inner {
-      max-width: 680px; margin: 0 auto; text-align: center;
-    }
-    .contact-info { margin-top: 1.6rem; }
-    .contact-info p { color: var(--text-muted); margin-bottom: 0.6rem; font-size: 0.95rem; }
-    .contact-info a { color: var(--accent); text-decoration: none; }
-    .contact-info a:hover { text-decoration: underline; }
-    .social-links { margin-top: 1.4rem; display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
-    .social-links a {
-      display: inline-block;
-      padding: 0.5rem 1.2rem;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.85rem; font-weight: 600;
-      color: var(--text-muted); text-decoration: none;
-      transition: all .2s;
-    }
-    .social-links a:hover { border-color: var(--accent); color: var(--accent); }
+    /* TEAM / ABOUT */
+    #panel-about { background:var(--bg-dark); }
+    .about-grid { display:grid; grid-template-columns:200px 1fr; gap:3rem; align-items:start; }
+    .about-avatar { width:160px; height:160px; background:var(--bg-card); border:2px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:4rem; margin:0 auto; }
+    .about-name { font-family:'Montserrat',sans-serif; font-size:1.5rem; font-weight:700; margin-bottom:0.3rem; }
+    .about-pos { color:var(--accent); font-size:0.93rem; font-weight:600; margin-bottom:0.2rem; }
+    .about-inst { color:var(--text-muted); font-size:0.88rem; margin-bottom:1.4rem; }
+    .about-bio { color:var(--text-muted); font-size:0.93rem; line-height:1.85; margin-bottom:1.6rem; }
+    .info-row { display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1.6rem; }
+    .info-item { font-size:0.87rem; color:var(--text-muted); }
+    .info-item b { color:var(--text-main); margin-right:0.5rem; }
+    .edu-list { list-style:none; }
+    .edu-list li { padding:0.7rem 0; border-bottom:1px solid var(--border); font-size:0.88rem; color:var(--text-muted); }
+    .edu-list li:last-child { border-bottom:none; }
+    .edu-list .deg { font-weight:700; color:var(--text-main); }
+    .edu-list .yr { color:var(--accent); font-size:0.8rem; }
 
-    /* ── FOOTER ── */
-    footer {
-      background: var(--bg-dark);
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 2rem 5%;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
+    /* CONTACT */
+    #panel-contact { background:var(--bg-card); }
+    #panel-contact .panel-inner { text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+    .contact-info p { color:var(--text-muted); margin-bottom:0.6rem; font-size:0.95rem; }
+    .contact-info a { color:var(--accent); text-decoration:none; }
+    .contact-info a:hover { text-decoration:underline; }
+    .social-links { margin-top:1.4rem; display:flex; gap:0.7rem; flex-wrap:wrap; justify-content:center; }
+    .social-links a { display:inline-block; padding:0.48rem 1.1rem; border:1px solid var(--border); border-radius:6px; font-size:0.83rem; font-weight:600; color:var(--text-muted); text-decoration:none; transition:all .2s; }
+    .social-links a:hover { border-color:var(--accent); color:var(--accent); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .nav-links { gap: 1rem; }
-      .btn-outline { margin-left: 0; margin-top: 0.6rem; }
+    @media(max-width:680px) {
+      .about-grid { grid-template-columns:1fr; }
+      .nav-links button { padding:0.4rem 0.6rem; font-size:0.78rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#"><span>YOUR</span> NAME Lab</a>
+  <a class="nav-logo" onclick="showPanel('home')">Kyungtaek <span>Park</span></a>
   <ul class="nav-links">
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#research">Research</a></li>
-    <li><a href="#publications">Publications</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><button onclick="showPanel('overview')" id="btn-overview">Overview</button></li>
+    <li><button onclick="showPanel('research')" id="btn-research">Research</button></li>
+    <li><button onclick="showPanel('publications')" id="btn-publications">Publications</button></li>
+    <li><button onclick="showPanel('about')" id="btn-about">About</button></li>
+    <li><button onclick="showPanel('contact')" id="btn-contact">Contact</button></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <!--<p class="hero-label">Laboratory of · · ·</p>-->
-  <h1><span class="highlight">ParkLab</span><br>Laboratory</h1>
-  <div class="hero-acronym">
-    <span><b>B</b>iostatistics</span>
-    <span><b>M</b>edical Genomics</span>
-    <span><b>S</b>election Bias</span>
+<!-- HOME -->
+<div class="panel active" id="panel-home">
+  <p class="hero-label">Statistical Genomics · Bioinformatics · Equitable AI</p>
+  <h1><span class="hl">Kyungtaek Park</span>, Ph.D.</h1>
+  <div class="hero-badges">
+    <span>GWAS</span>
+    <span>Bulk RNA-seq</span>
+    <span>Single-Cell RNA-seq</span>
+    <span>Algorithm Development</span>
+    <span>Fairness in AI</span>
   </div>
-  <p class="hero-subtitle">
-    Under Construction..
+  <p class="hero-sub">
+    Assistant Professor, Department of Statistics, Jeonbuk National University.<br/>
+    Developing statistical methods and computational pipelines for large-scale genomic data,
+    with a future focus on selection bias and representational equity in biomedical AI.
   </p>
   <div>
-    <a href="#overview" class="btn btn-primary">Learn More</a>
-    <a href="#contact" class="btn btn-outline">Contact Us</a>
+    <button class="btn btn-primary" onclick="showPanel('overview')">Learn More</button>
+    <button class="btn btn-outline" onclick="showPanel('contact')">Contact</button>
   </div>
-</section>
+</div>
 
 <!-- OVERVIEW -->
-<section id="overview">
-  <div class="inner">
-    <p class="section-label">Research Interests Overview</p>
-    <h2 class="section-title">Decoding multi-OMICs to [Impact Statement]</h2>
-    <div class="divider" style="margin: 1rem auto 2rem;"></div>
-    <p class="section-body">
-      Replace this paragraph with your lab's research overview. Describe the central questions
-      your team addresses, the methodological framework you employ (computational, experimental,
-      or integrative), and the broader scientific or public health significance of your work.
-      Keep it to 3–5 sentences for readability.
+<div class="panel" id="panel-overview">
+  <div class="panel-inner">
+    <p class="section-label">Research Overview</p>
+    <h2 class="section-title">From Population Genomics to Algorithmic Fairness</h2>
+    <div class="divider"></div>
+    <p class="overview-body">
+      My research lies at the intersection of statistical genetics, bioinformatics, and computational
+      method development. I work with large-scale genomic data — including genome-wide association
+      studies (GWAS), bulk RNA-seq, and single-cell RNA-seq — to uncover the genetic and
+      transcriptomic underpinnings of complex diseases such as gastric cancer, depression,
+      nontuberculous mycobacterial pulmonary disease, and severe asthma.
+    </p>
+    <p class="overview-body">
+      A core emphasis of my work is algorithmic development: designing statistically rigorous
+      pipelines that address the unique challenges of correlated, high-dimensional, and
+      heterogeneous biological data. Tools I have developed include BALLI (differential expression
+      for correlated RNA-seq) and COBRA (batch effect correction for single-cell data).
+    </p>
+    <p class="overview-body">
+      Going forward, I aim to investigate <strong style="color:var(--text-main)">selection bias
+      in biomedical machine learning</strong> — particularly the underrepresentation of diverse
+      ancestries, sexes, and demographic groups in training data — and to develop debiasing
+      algorithms that produce equitable model performance across population strata.
     </p>
   </div>
-</section>
+  <div class="panel-footer">© 2025 Kyungtaek Park · Jeonbuk National University</div>
+</div>
 
 <!-- RESEARCH -->
-<section id="research">
-  <div class="inner">
+<div class="panel" id="panel-research">
+  <div class="panel-inner wide">
     <p class="section-label">Research Areas</p>
     <h2 class="section-title">Core Research Directions</h2>
     <div class="divider"></div>
     <div class="cards">
 
       <div class="card">
-        <div class="card-icon">🔬</div>
-        <h3>Research Area 1 — Evolution</h3>
-        <p>
-          Describe the first major research direction. What biological or computational questions
-          does this thrust address? What tools or servers has your team developed?
-        </p>
-      </div>
-
-      <div class="card">
         <div class="card-icon">🧬</div>
-        <h3>Research Area 2 — Characterization</h3>
+        <span class="tag">GWAS</span><span class="tag">Genetic Epidemiology</span>
+        <h3>Population Genomics & Genetic Epidemiology</h3>
         <p>
-          Describe the second research direction. Which model organisms, pathogens, or cell types
-          are studied? What phenotypic or molecular assays are employed?
+          I conduct genome-wide association studies (GWAS) to identify genetic loci associated
+          with complex diseases — including gastric cancer, depression, NTM pulmonary disease,
+          and asthma — across large-scale population cohorts in Korea and Japan.
+          Analyses integrate SNP data, environmental factors, and disease phenotypes to
+          elucidate genomic risk architecture.
         </p>
       </div>
 
       <div class="card">
-        <div class="card-icon">💊</div>
-        <h3>Research Area 3 — Therapeutics</h3>
+        <div class="card-icon">🔬</div>
+        <span class="tag">Bulk RNA-seq</span><span class="tag">scRNA-seq</span>
+        <h3>Transcriptomics & Multi-Omics</h3>
         <p>
-          Describe translational or drug-discovery efforts. What pipeline (e.g., virtual screening,
-          structure-based design) does your team use? What are the target classes?
+          I analyze bulk RNA-seq and single-cell RNA-seq data to characterize transcriptional
+          changes associated with disease states, drug treatments, and cell-type-specific responses.
+          Applications include severe asthma under biologics therapy, mesenchymal stem cells,
+          and schizophrenia models, with a focus on identifying differentially expressed genes
+          and cell-type heterogeneity.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">⚙️</div>
+        <span class="tag">Algorithm</span><span class="tag">Software</span>
+        <h3>Statistical & Computational Method Development</h3>
+        <p>
+          I develop open-source statistical tools tailored to genomic data: BALLI (Bartlett-adjusted
+          likelihood-based linear model for correlated RNA-seq), COBRA (cell-type-specific
+          orthogonal batch effect removal for scRNA-seq), and extensions targeting
+          biobank-scale correlated datasets. Emphasis is placed on statistical rigor,
+          interpretability, and scalability.
+        </p>
+      </div>
+
+      <div class="card" style="border-style:dashed; border-color:rgba(88,166,255,0.4);">
+        <div class="card-icon">🔭</div>
+        <span class="tag green">Future Direction</span>
+        <h3>Fairness & Selection Bias in Biomedical AI</h3>
+        <p>
+          My next research thrust will examine selection bias in machine learning models applied
+          to genomic and clinical data — focusing on the underrepresentation of non-European
+          ancestries, sex-stratified variation, and demographic minorities in training cohorts.
+          The goal is to develop debiasing algorithms that ensure equitable model performance
+          across diverse population strata.
         </p>
       </div>
 
     </div>
   </div>
-</section>
+  <div class="panel-footer">© 2025 Kyungtaek Park · Jeonbuk National University</div>
+</div>
 
 <!-- PUBLICATIONS -->
-<section id="publications">
-  <div class="inner">
+<div class="panel" id="panel-publications">
+  <div class="panel-inner">
     <p class="section-label">Selected Publications</p>
     <h2 class="section-title">Recent Work</h2>
     <div class="divider"></div>
@@ -357,106 +258,174 @@
 
       <li>
         <span class="pub-title">
-          Title of Publication One: A Comprehensive Study of [Topic]
+          Comparative Transcriptomic Profiling of Mesenchymal Stem Cells from Distinct Tissue Origins and Isolation Methods
+          <span class="pub-year">2026</span>
+        </span>
+        <span>Lee MJ*, <span class="pub-me">Park K*</span>, Won S†, Jo CH†</span><br/>
+        <span class="pub-journal">Tissue Engineering and Regenerative Medicine</span>
+      </li>
+
+      <li>
+        <span class="pub-title">
+          Novel Genetic Loci for Nontuberculous Mycobacterial Pulmonary Disease and Potential Protective Effect of Body Mass Index
+          <span class="pub-year">2025</span>
+        </span>
+        <span><span class="pub-me">Park K*</span>, Kim H*, Huh HJ* et al.</span><br/>
+        <span class="pub-journal">American Journal of Respiratory and Critical Care Medicine</span>
+      </li>
+
+      <li>
+        <span class="pub-title">
+          rs762855 SNP Modulates the Risk for Diffuse-Type Gastric Cancer in Females: A GWAS in the Korean Population
+          <span class="pub-year">2025</span>
+        </span>
+        <span><span class="pub-me">Park K*</span>, Shin CM* et al.</span><br/>
+        <span class="pub-journal">Gastric Cancer</span>
+      </li>
+
+      <li>
+        <span class="pub-title">
+          Single-Cell RNA Sequencing Reveals Transcriptional Changes in Circulating Immune Cells from Patients with Severe Asthma Induced by Biologics
           <span class="pub-year">2024</span>
         </span>
-        <span class="pub-authors">Author A, <strong>Your Name</strong>, Author B, Author C</span><br/>
-        <span class="pub-journal">Journal Name, Volume(Issue):Pages</span>
+        <span><span class="pub-me">Park K*</span>, Lee JH* et al.</span><br/>
+        <span class="pub-journal">Experimental &amp; Molecular Medicine</span>
       </li>
 
       <li>
         <span class="pub-title">
-          Title of Publication Two: Mechanistic Insights into [Topic]
-          <span class="pub-year">2023</span>
+          Genome-Wide Association Study Implicates the Role of TBXAS1 in the Pathogenesis of Depressive Symptoms among the Korean Population
+          <span class="pub-year">2024</span>
         </span>
-        <span class="pub-authors">Author D, Author E, <strong>Your Name</strong></span><br/>
-        <span class="pub-journal">Journal Name, Volume(Issue):Pages</span>
+        <span><span class="pub-me">Park K</span>, Do AR, Chung Y et al.</span><br/>
+        <span class="pub-journal">Translational Psychiatry</span>
       </li>
 
       <li>
         <span class="pub-title">
-          Title of Publication Three: Development of [Method/Tool]
+          rs2671655 SNP Modulates the Risk for Gastric Cancer in Helicobacter pylori-Infected Individuals: A GWAS in the Korean Population
           <span class="pub-year">2022</span>
         </span>
-        <span class="pub-authors"><strong>Your Name</strong>, Author F, Author G</span><br/>
-        <span class="pub-journal">Journal Name, Volume(Issue):Pages</span>
+        <span>Shin CM*, <span class="pub-me">Park K*</span>, Kim N† et al.</span><br/>
+        <span class="pub-journal">Gastric Cancer</span>
+      </li>
+
+      <li>
+        <span class="pub-title">
+          BALLI: Bartlett-Adjusted Likelihood-Based Linear Model Approach for Identifying Differentially Expressed Genes with RNA-seq Data
+          <span class="pub-year">2019</span>
+        </span>
+        <span><span class="pub-me">Park K</span>, An J, Gim J et al.</span><br/>
+        <span class="pub-journal">BMC Genomics</span>
       </li>
 
     </ul>
-    <a href="#" class="btn btn-outline" style="margin-top:1.6rem; display:inline-block;">
-      View All Publications →
-    </a>
+    <p style="font-size:0.82rem; color:var(--text-muted); margin-top:1.4rem;">* equally contributed &nbsp;|&nbsp; † corresponding author</p>
   </div>
-</section>
+  <div class="panel-footer">© 2025 Kyungtaek Park · Jeonbuk National University</div>
+</div>
 
-<!-- TEAM -->
-<section id="team">
-  <div class="inner">
-    <p class="section-label">People</p>
-    <h2 class="section-title">Our Team</h2>
+<!-- ABOUT -->
+<div class="panel" id="panel-about">
+  <div class="panel-inner">
+    <p class="section-label">About</p>
+    <h2 class="section-title">Kyungtaek Park, Ph.D.</h2>
     <div class="divider"></div>
-    <div class="team-grid">
-
-      <div class="member">
-        <div class="member-avatar">👤</div>
-        <h4>Your Name</h4>
-        <p>Principal Investigator</p>
+    <div class="about-grid">
+      <div style="text-align:center;">
+        <div class="about-avatar">👤</div>
+        <div style="margin-top:1rem;">
+          <div class="social-links" style="flex-direction:column; align-items:center; gap:0.5rem;">
+            <a href="mailto:qkrrudxor147@gmail.com">✉ Email</a>
+            <a href="#" target="_blank">Google Scholar</a>
+            <a href="#" target="_blank">PubMed</a>
+            <a href="#" target="_blank">GitHub</a>
+          </div>
+        </div>
       </div>
+      <div>
+        <div class="about-name">Kyungtaek Park</div>
+        <div class="about-pos">Assistant Professor</div>
+        <div class="about-inst">Department of Statistics, Jeonbuk National University, Korea</div>
+        <p class="about-bio">
+          I am a statistical geneticist and bioinformatician whose research spans genome-wide
+          association studies, transcriptomics (bulk and single-cell RNA-seq), and computational
+          method development. My work aims to develop statistically rigorous algorithms for
+          high-dimensional genomic data and to translate findings into biological insight
+          for complex diseases. I received my Ph.D. from Seoul National University under
+          Prof. Sungho Won, and subsequently held research positions at the Institute of
+          Health and Environment, Seoul National University, before joining Jeonbuk National
+          University as Assistant Professor in September 2025.
+        </p>
 
-      <div class="member">
-        <div class="member-avatar">👤</div>
-        <h4>Team Member Name</h4>
-        <p>PhD Student</p>
+        <p class="section-label" style="margin-bottom:0.6rem;">Education</p>
+        <ul class="edu-list">
+          <li>
+            <span class="deg">Ph.D.</span> Interdisciplinary Program of Bioinformatics<br/>
+            Seoul National University &nbsp;<span class="yr">Mar 2015 – Aug 2021</span><br/>
+            <span style="font-size:0.82rem;">Advisor: Prof. Sungho Won</span>
+          </li>
+          <li>
+            <span class="deg">B.S.</span> Biological Sciences (Minor: Business Administration, Brain-Mind-Behavior)<br/>
+            Seoul National University &nbsp;<span class="yr">Mar 2009 – Feb 2015</span>
+          </li>
+        </ul>
+
+        <p class="section-label" style="margin-top:1.6rem; margin-bottom:0.6rem;">Software</p>
+        <div class="info-row">
+          <div class="info-item"><b>ONETOOL</b> Family-based big data analysis (C++)</div>
+          <div class="info-item"><b>BALLI</b> Differential expression for correlated RNA-seq (R)</div>
+          <div class="info-item"><b>COBRA</b> Cell-type-specific batch effect removal for scRNA-seq (in revision)</div>
+        </div>
+
+        <p class="section-label" style="margin-top:0.4rem; margin-bottom:0.6rem;">Patents</p>
+        <div class="info-row">
+          <div class="info-item">Composition for predicting gastric cancer related to H. pylori infection (10-2757562, Korea, 2025)</div>
+          <div class="info-item">SNPs for the diagnosis of depression (10-2883401, Korea, 2025)</div>
+        </div>
       </div>
-
-      <div class="member">
-        <div class="member-avatar">👤</div>
-        <h4>Team Member Name</h4>
-        <p>Postdoctoral Researcher</p>
-      </div>
-
-      <div class="member">
-        <div class="member-avatar">👤</div>
-        <h4>Team Member Name</h4>
-        <p>Research Associate</p>
-      </div>
-
-      <!-- We are hiring -->
-      <div class="member" style="border-style: dashed; border-color: var(--accent);">
-        <div class="member-avatar" style="background:rgba(88,166,255,0.1); color:var(--accent);">+</div>
-        <h4 style="color:var(--accent);">We Are Hiring</h4>
-        <p>Open positions in the lab</p>
-      </div>
-
     </div>
   </div>
-</section>
+  <div class="panel-footer">© 2025 Kyungtaek Park · Jeonbuk National University</div>
+</div>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="inner">
+<div class="panel" id="panel-contact">
+  <div class="panel-inner">
     <p class="section-label">Contact</p>
     <h2 class="section-title">Get In Touch</h2>
-    <div class="divider" style="margin: 1rem auto 1.6rem;"></div>
-    <div class="contact-info">
-      <p>📧 <a href="mailto:yourname@university.edu">yourname@university.edu</a></p>
-      <p>🏛️ Department of [Your Department], [Your University]</p>
-      <p>📍 Building Name, Room Number, City, State/Country</p>
+    <div class="divider" style="margin-left:auto; margin-right:auto;"></div>
+    <div class="contact-info" style="margin-top:0.4rem;">
+      <p>📧 <a href="mailto:qkrrudxor147@gmail.com">qkrrudxor147@gmail.com</a></p>
+      <p>🏛️ Department of Statistics, Jeonbuk National University</p>
+      <p>📍 Jeonju, Republic of Korea</p>
     </div>
-    <div class="social-links">
-      <a href="#">GitHub</a>
-      <a href="#">Google Scholar</a>
-      <a href="#">PubMed</a>
-      <a href="#">Twitter / X</a>
-      <a href="#">LinkedIn</a>
+    <div class="social-links" style="margin-top:1.6rem;">
+      <a href="#" target="_blank">Google Scholar</a>
+      <a href="#" target="_blank">PubMed</a>
+      <a href="#" target="_blank">GitHub</a>
+      <a href="#" target="_blank">LinkedIn</a>
     </div>
+    <p style="color:var(--text-muted); font-size:0.85rem; margin-top:2rem; max-width:480px; text-align:center;">
+      I welcome inquiries from prospective graduate students and collaborators interested
+      in statistical genomics, single-cell transcriptomics, or fairness in biomedical AI.
+    </p>
   </div>
-</section>
+  <div class="panel-footer">© 2025 Kyungtaek Park · Jeonbuk National University</div>
+</div>
 
-<!-- FOOTER -->
-<footer>
-  <p>© 2025 Your Name Laboratory · [University Name] · Built with GitHub Pages</p>
-</footer>
-
+<script>
+  const panels = ['home','overview','research','publications','about','contact'];
+  function showPanel(id) {
+    panels.forEach(p => {
+      document.getElementById('panel-' + p).classList.remove('active');
+      const btn = document.getElementById('btn-' + p);
+      if (btn) btn.classList.remove('active');
+    });
+    document.getElementById('panel-' + id).classList.add('active');
+    const ab = document.getElementById('btn-' + id);
+    if (ab) ab.classList.add('active');
+  }
+</script>
 </body>
 </html>
