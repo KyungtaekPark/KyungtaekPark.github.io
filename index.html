@@ -9,18 +9,11 @@
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
     :root {
       --bg-dark:#0d1117; --bg-card:#161b22;
-      --accent:#58a6ff;
-      --accent2:#3fb950;
-      --accent3:#f0883e;
+      --accent:#58a6ff; --accent2:#3fb950; --accent3:#f0883e;
       --text-main:#e6edf3; --text-muted:#8b949e; --border:#30363d; --nav-h:64px;
     }
-    body.theme-slate  { --bg-dark:#0f1923; --bg-card:#182433; --accent:#7eb8f7; --accent2:#4ec9a0; --accent3:#f0a05a; --text-main:#dce8f5; --text-muted:#7a9bb5; --border:#243650; }
-    body.theme-forest { --bg-dark:#0d1a10; --bg-card:#122016; --accent:#4ec994; --accent2:#a3d977; --accent3:#f0c84a; --text-main:#d8f0e0; --text-muted:#6b9e7a; --border:#1e3a28; }
-    body.theme-warm   { --bg-dark:#16100a; --bg-card:#201610; --accent:#f0a05a; --accent2:#e8c96a; --accent3:#d96060; --text-main:#f5ede0; --text-muted:#a08060; --border:#3a2a18; }
-    body.theme-purple { --bg-dark:#0e0d1a; --bg-card:#161428; --accent:#a78bfa; --accent2:#60c8f0; --accent3:#f472b6; --text-main:#e8e4f8; --text-muted:#8b80b8; --border:#2d2850; }
-
     html { scroll-snap-type:y proximity; }
-    body { font-family:'Open Sans',sans-serif; background:var(--bg-dark); color:var(--text-main); line-height:1.7; overflow-x:hidden; transition:background .4s,color .4s; }
+    body { font-family:'Open Sans',sans-serif; background:var(--bg-dark); color:var(--text-main); line-height:1.7; overflow-x:hidden; }
 
     /* NAV */
     nav {
@@ -30,34 +23,24 @@
       display:flex; align-items:center; justify-content:space-between; padding:0 4%;
     }
     .nav-logo { font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.2rem; color:var(--text-main); cursor:pointer; user-select:none; }
-    .nav-logo .br  { color:var(--accent); }
-    .nav-logo .idge { color:var(--accent2); }
     .nav-logo-sub { font-size:0.62rem; font-weight:400; color:var(--text-muted); letter-spacing:0.04em; display:block; margin-top:-2px; }
-    .nav-right { display:flex; align-items:center; gap:0.4rem; }
     .nav-links { display:flex; gap:0.2rem; list-style:none; }
     .nav-links button {
       background:none; border:none; cursor:pointer; color:var(--text-muted);
-      font-size:0.88rem; font-weight:600; font-family:'Open Sans',sans-serif;
-      padding:0.45rem 1rem; border-radius:6px; transition:color .2s,background .2s;
+      font-size:0.85rem; font-weight:600; font-family:'Open Sans',sans-serif;
+      padding:0.45rem 0.85rem; border-radius:6px; transition:color .2s,background .2s;
     }
     .nav-links button:hover { color:var(--text-main); background:rgba(255,255,255,0.05); }
     .nav-links button.active { color:var(--accent); background:rgba(88,166,255,0.08); }
-    .theme-switcher { display:flex; gap:6px; margin-left:1rem; }
-    .theme-dot { width:16px; height:16px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:border-color .2s,transform .2s; }
-    .theme-dot:hover, .theme-dot.active { border-color:var(--text-main); transform:scale(1.2); }
-    .theme-dot[data-theme="default"] { background:linear-gradient(135deg,#58a6ff,#3fb950); }
-    .theme-dot[data-theme="slate"]   { background:linear-gradient(135deg,#7eb8f7,#4ec9a0); }
-    .theme-dot[data-theme="forest"]  { background:linear-gradient(135deg,#4ec994,#a3d977); }
-    .theme-dot[data-theme="warm"]    { background:linear-gradient(135deg,#f0a05a,#e8c96a); }
-    .theme-dot[data-theme="purple"]  { background:linear-gradient(135deg,#a78bfa,#f472b6); }
 
     /* SECTIONS */
     section { min-height:100vh; display:flex; flex-direction:column; padding-top:var(--nav-h); scroll-snap-align:start; }
     #overview     { background:var(--bg-card); border-top:1px solid var(--border); }
     #research     { background:var(--bg-dark); border-top:1px solid var(--border); }
     #publications { background:var(--bg-card); border-top:1px solid var(--border); }
-    #about        { background:var(--bg-dark); border-top:1px solid var(--border); }
-    #contact      { background:var(--bg-card); border-top:1px solid var(--border); }
+    #software     { background:var(--bg-dark); border-top:1px solid var(--border); }
+    #about        { background:var(--bg-card); border-top:1px solid var(--border); }
+    #contact      { background:var(--bg-dark); border-top:1px solid var(--border); }
 
     .sec-inner { max-width:960px; width:100%; margin:0 auto; padding:2.5rem 2rem 4rem; flex:1; }
     .sec-inner.wide { max-width:1080px; }
@@ -74,35 +57,18 @@
         radial-gradient(ellipse at 25% 70%, rgba(63,185,80,0.08) 0%, transparent 55%),
         var(--bg-dark);
     }
-    .hero-labname {
-      font-family:'Montserrat',sans-serif;
-      font-size:clamp(3rem,8vw,6rem);
-      font-weight:700; line-height:1; margin-bottom:0.5rem; letter-spacing:0.04em;
-    }
-    .hero-labname .br   { color:var(--accent); }
-    .hero-labname .idge { color:var(--accent2); }
-    .hero-fullname {
-      font-size:0.85rem; color:var(--text-muted); letter-spacing:0.12em;
-      margin-bottom:1.8rem; font-weight:400;
-    }
+    .hero-labname { font-family:'Montserrat',sans-serif; font-size:clamp(3rem,8vw,6rem); font-weight:700; line-height:1; margin-bottom:0.5rem; letter-spacing:0.04em; color:var(--text-main); }
+    .hero-fullname { font-size:0.85rem; color:var(--text-muted); letter-spacing:0.12em; margin-bottom:1.8rem; }
     .hero-fullname b { color:var(--text-main); }
-    .hero-tagline {
-      font-family:'Montserrat',sans-serif;
-      font-size:clamp(1.1rem,2.5vw,1.6rem);
-      font-weight:600; line-height:1.3; margin-bottom:1rem;
-    }
-    .hero-eq  { color:var(--accent); }
-    .hero-met { color:var(--accent3); }
-    .hero-gen { color:var(--accent2); }
+    .hero-tagline { font-family:'Montserrat',sans-serif; font-size:clamp(1.1rem,2.5vw,1.6rem); font-weight:600; line-height:1.3; margin-bottom:1rem; }
+    .hero-eq { color:var(--accent); } .hero-met { color:var(--accent3); } .hero-gen { color:var(--accent2); }
     .hero-sub { max-width:640px; margin:0 auto 2rem; color:var(--text-muted); font-size:0.98rem; line-height:1.8; }
     .hero-sub strong { color:var(--text-main); }
-
     .pill-row { display:flex; gap:0.7rem; flex-wrap:wrap; justify-content:center; margin-bottom:2.4rem; }
     .pill { border-radius:99px; padding:0.3rem 1rem; font-size:0.8rem; font-weight:700; }
     .pill.orange { background:rgba(240,136,62,0.15); border:1px solid rgba(240,136,62,0.5); color:var(--accent3); }
     .pill.green  { background:rgba(63,185,80,0.15);  border:1px solid rgba(63,185,80,0.5);  color:var(--accent2); }
     .pill.blue   { background:rgba(88,166,255,0.12); border:1px solid rgba(88,166,255,0.4); color:var(--accent); }
-
     .btn { display:inline-block; padding:0.72rem 1.8rem; border-radius:8px; font-weight:600; font-size:0.92rem; cursor:pointer; transition:all .2s; font-family:'Open Sans',sans-serif; border:none; text-decoration:none; }
     .btn-primary { background:var(--accent); color:#0d1117; }
     .btn-primary:hover { filter:brightness(1.15); }
@@ -110,25 +76,25 @@
     .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
 
     /* OVERVIEW */
+    #overview .sec-inner { padding-top:4rem; }
     .overview-lead { font-size:1.08rem; color:var(--text-main); line-height:1.85; margin-bottom:1.2rem; }
     .overview-body { font-size:0.97rem; color:var(--text-muted); line-height:1.9; margin-bottom:1.2rem; }
     .overview-body strong { color:var(--text-main); }
-    .overview-future { font-size:0.97rem; color:var(--text-muted); line-height:1.9; }
+    .overview-future { font-size:0.97rem; color:var(--text-muted); line-height:1.9; margin-bottom:2rem; }
     .overview-future strong { color:var(--accent3); }
+    .overview-stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; margin-top:2.4rem; }
+    .stat-card { background:var(--bg-dark); border:1px solid var(--border); border-radius:10px; padding:1.2rem 1rem; text-align:center; }
+    .stat-num { font-family:'Montserrat',sans-serif; font-size:1.8rem; font-weight:700; color:var(--accent); display:block; margin-bottom:0.2rem; }
+    .stat-num.green { color:var(--accent2); } .stat-num.orange { color:var(--accent3); }
+    .stat-label { font-size:0.8rem; color:var(--text-muted); }
 
     /* RESEARCH */
     .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.4rem; }
     .card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.8rem; transition:border-color .25s,transform .25s; }
     .card:hover { transform:translateY(-4px); }
-    .card.c-orange { border-color:rgba(240,136,62,0.35); }
-    .card.c-orange:hover { border-color:var(--accent3); }
-    .card.c-orange h3 { color:var(--accent3); }
-    .card.c-green  { border-color:rgba(63,185,80,0.3); }
-    .card.c-green:hover  { border-color:var(--accent2); }
-    .card.c-green h3  { color:var(--accent2); }
-    .card.c-blue { border-style:dashed; border-color:rgba(88,166,255,0.4); }
-    .card.c-blue:hover { border-color:var(--accent); }
-    .card.c-blue h3 { color:var(--accent); }
+    .card.c-orange { border-color:rgba(240,136,62,0.35); } .card.c-orange:hover { border-color:var(--accent3); } .card.c-orange h3 { color:var(--accent3); }
+    .card.c-green  { border-color:rgba(63,185,80,0.3);  } .card.c-green:hover  { border-color:var(--accent2); } .card.c-green h3  { color:var(--accent2); }
+    .card.c-blue   { border-style:dashed; border-color:rgba(88,166,255,0.4); } .card.c-blue:hover { border-color:var(--accent); } .card.c-blue h3 { color:var(--accent); }
     .card-icon { font-size:1.9rem; margin-bottom:0.8rem; }
     .card h3 { font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem; }
     .card p { font-size:0.87rem; color:var(--text-muted); line-height:1.75; }
@@ -138,6 +104,8 @@
     .tag.blue   { background:rgba(88,166,255,0.12); color:var(--accent); }
 
     /* PUBLICATIONS */
+    .pub-section-title { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--text-main); margin:2rem 0 0.9rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); }
+    .pub-section-title:first-of-type { margin-top:0; }
     .pub-list { list-style:none; }
     .pub-list li { padding:1rem 0; border-bottom:1px solid var(--border); font-size:0.89rem; color:var(--text-muted); }
     .pub-list li:last-child { border-bottom:none; }
@@ -152,18 +120,43 @@
     .scholar-btn { display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.8rem; padding:0.65rem 1.6rem; border:1px solid var(--accent); border-radius:8px; color:var(--accent); font-size:0.88rem; font-weight:600; text-decoration:none; transition:all .2s; }
     .scholar-btn:hover { background:rgba(88,166,255,0.1); }
 
+    /* SOFTWARE */
+    .sw-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.4rem; }
+    .sw-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.8rem; transition:border-color .25s,transform .25s; }
+    .sw-card:hover { border-color:var(--accent2); transform:translateY(-4px); }
+    .sw-card-header { display:flex; align-items:center; gap:0.8rem; margin-bottom:0.8rem; }
+    .sw-icon { font-size:1.6rem; }
+    .sw-name { font-family:'Montserrat',sans-serif; font-size:1.1rem; font-weight:700; color:var(--text-main); }
+    .sw-lang { display:inline-block; background:rgba(63,185,80,0.12); color:var(--accent2); font-size:0.72rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:4px; margin-left:0.4rem; }
+    .sw-lang.orange { background:rgba(240,136,62,0.12); color:var(--accent3); }
+    .sw-desc { font-size:0.88rem; color:var(--text-muted); line-height:1.75; margin-bottom:1rem; }
+    .sw-links { display:flex; gap:0.5rem; flex-wrap:wrap; }
+    .sw-link { padding:0.3rem 0.9rem; border:1px solid var(--border); border-radius:6px; font-size:0.78rem; font-weight:600; color:var(--text-muted); text-decoration:none; transition:all .2s; }
+    .sw-link:hover { border-color:var(--accent2); color:var(--accent2); }
+    .sw-badge { display:inline-block; font-size:0.68rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:4px; margin-left:0.3rem; }
+    .sw-badge.rev { background:rgba(88,166,255,0.12); color:var(--accent); }
+
     /* ABOUT */
     .about-sub { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--text-main); margin:2rem 0 0.9rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); }
-    .pi-card { background:var(--bg-card); border:1px solid var(--accent); border-radius:12px; padding:1.8rem; display:grid; grid-template-columns:120px 1fr; gap:1.8rem; align-items:start; }
-    .pi-avatar { width:100px; height:100px; background:var(--border); border-radius:50%; margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:2.6rem; overflow:hidden; }
+    .pi-card { background:var(--bg-dark); border:1px solid var(--accent); border-radius:12px; padding:1.8rem; display:grid; grid-template-columns:140px 1fr; gap:1.8rem; align-items:start; }
+    .pi-left { display:flex; flex-direction:column; align-items:center; gap:1rem; }
+    .pi-avatar { width:110px; height:110px; background:var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2.6rem; overflow:hidden; }
     .pi-avatar img { width:100%; height:100%; object-fit:cover; }
-    .pi-name { font-family:'Montserrat',sans-serif; font-size:1.1rem; font-weight:700; margin-bottom:0.15rem; }
+    .pi-links { display:flex; flex-direction:column; gap:0.4rem; width:100%; }
+    .pi-links a { padding:0.28rem 0.7rem; border:1px solid var(--border); border-radius:6px; font-size:0.76rem; font-weight:600; color:var(--text-muted); text-decoration:none; transition:all .2s; text-align:center; }
+    .pi-links a:hover { border-color:var(--accent); color:var(--accent); }
+    .pi-name { font-family:'Montserrat',sans-serif; font-size:1.15rem; font-weight:700; margin-bottom:0.15rem; }
     .pi-role { color:var(--accent); font-size:0.85rem; font-weight:600; margin-bottom:0.1rem; }
     .pi-inst { color:var(--text-muted); font-size:0.82rem; margin-bottom:0.9rem; }
-    .pi-bio  { color:var(--text-muted); font-size:0.88rem; line-height:1.8; margin-bottom:0.9rem; }
-    .pi-links { display:flex; gap:0.5rem; flex-wrap:wrap; }
-    .pi-links a { padding:0.3rem 0.85rem; border:1px solid var(--border); border-radius:6px; font-size:0.78rem; font-weight:600; color:var(--text-muted); text-decoration:none; transition:all .2s; }
-    .pi-links a:hover { border-color:var(--accent); color:var(--accent); }
+    .pi-bio  { color:var(--text-muted); font-size:0.88rem; line-height:1.8; margin-bottom:1.2rem; }
+    /* ③ Education 안으로 */
+    .pi-edu-title { font-family:'Montserrat',sans-serif; font-size:0.85rem; font-weight:700; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.6rem; }
+    .pi-edu-list { list-style:none; }
+    .pi-edu-list li { padding:0.5rem 0; border-bottom:1px solid var(--border); font-size:0.84rem; color:var(--text-muted); }
+    .pi-edu-list li:last-child { border-bottom:none; }
+    .pi-edu-list .deg { font-weight:700; color:var(--text-main); display:block; }
+    .pi-edu-list .yr  { color:var(--accent); font-size:0.78rem; }
+
     .hiring-box { background:rgba(88,166,255,0.05); border:1px dashed rgba(88,166,255,0.4); border-radius:12px; padding:1.4rem 1.8rem; margin-bottom:1.2rem; }
     .hiring-box h4 { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--accent); margin-bottom:0.5rem; }
     .hiring-box p { font-size:0.87rem; color:var(--text-muted); line-height:1.8; }
@@ -171,15 +164,10 @@
     .hiring-box a { color:var(--accent); text-decoration:none; }
     .hiring-box a:hover { text-decoration:underline; }
     .member-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; margin-top:0.8rem; }
-    .member-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.4rem 1rem; text-align:center; }
+    .member-card { background:var(--bg-dark); border:1px solid var(--border); border-radius:12px; padding:1.4rem 1rem; text-align:center; }
     .member-avatar { width:64px; height:64px; background:var(--border); border-radius:50%; margin:0 auto 0.8rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; }
     .member-card h4 { font-size:0.88rem; font-weight:700; margin-bottom:0.2rem; }
     .member-card p  { font-size:0.77rem; color:var(--text-muted); }
-    .info-list { list-style:none; }
-    .info-list li { padding:0.6rem 0; border-bottom:1px solid var(--border); font-size:0.86rem; color:var(--text-muted); }
-    .info-list li:last-child { border-bottom:none; }
-    .info-list .lbl { font-weight:700; color:var(--text-main); display:block; margin-bottom:0.1rem; }
-    .info-list .yr  { color:var(--accent); font-size:0.78rem; }
 
     /* CONTACT */
     #contact .sec-inner { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
@@ -192,9 +180,10 @@
     .recruit-box { margin-top:2rem; max-width:480px; background:rgba(88,166,255,0.06); border:1px solid rgba(88,166,255,0.25); border-radius:10px; padding:1.2rem 1.6rem; font-size:0.88rem; color:var(--text-muted); line-height:1.8; }
     .recruit-box strong { color:var(--accent); }
 
-    @media(max-width:680px) {
-      .pi-card { grid-template-columns:1fr; text-align:center; }
-      .pi-links { justify-content:center; }
+    @media(max-width:720px) {
+      .pi-card { grid-template-columns:1fr; }
+      .pi-left { flex-direction:row; align-items:flex-start; }
+      .pi-links { flex-direction:row; flex-wrap:wrap; width:auto; }
       .nav-links button { padding:0.4rem 0.5rem; font-size:0.76rem; }
     }
   </style>
@@ -203,32 +192,22 @@
 
 <nav>
   <div>
-    <span class="nav-logo" onclick="navTo('home')">
-      <span class="br">BRI</span><span class="idge">DGE</span> Lab
-    </span>
+    <span class="nav-logo" onclick="navTo('home')">BRIDGE Lab</span>
     <span class="nav-logo-sub">Biostatistics &amp; Research for Inclusive Diverse Genomic Equity</span>
   </div>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><button onclick="navTo('overview')"     id="btn-overview">Overview</button></li>
-      <li><button onclick="navTo('research')"     id="btn-research">Research</button></li>
-      <li><button onclick="navTo('publications')" id="btn-publications">Publications</button></li>
-      <li><button onclick="navTo('about')"        id="btn-about">About</button></li>
-      <li><button onclick="navTo('contact')"      id="btn-contact">Contact</button></li>
-    </ul>
-    <div class="theme-switcher">
-      <div class="theme-dot active" data-theme="default" onclick="setTheme('default')" title="Default"></div>
-      <div class="theme-dot" data-theme="slate"   onclick="setTheme('slate')"   title="Slate Blue"></div>
-      <div class="theme-dot" data-theme="forest"  onclick="setTheme('forest')"  title="Forest"></div>
-      <div class="theme-dot" data-theme="warm"    onclick="setTheme('warm')"    title="Warm Dark"></div>
-      <div class="theme-dot" data-theme="purple"  onclick="setTheme('purple')"  title="Purple"></div>
-    </div>
-  </div>
+  <ul class="nav-links">
+    <li><button onclick="navTo('overview')"     id="btn-overview">Overview</button></li>
+    <li><button onclick="navTo('research')"     id="btn-research">Research</button></li>
+    <li><button onclick="navTo('publications')" id="btn-publications">Publications</button></li>
+    <li><button onclick="navTo('software')"     id="btn-software">Software</button></li>
+    <li><button onclick="navTo('about')"        id="btn-about">About</button></li>
+    <li><button onclick="navTo('contact')"      id="btn-contact">Contact</button></li>
+  </ul>
 </nav>
 
 <!-- HOME -->
 <section id="home">
-  <div class="hero-labname"><span class="br">BRI</span><span class="idge">DGE</span></div>
+  <div class="hero-labname">BRIDGE</div>
   <div class="hero-fullname">
     <b>B</b>iostatistics and <b>R</b>esearch for <b>I</b>nclusive <b>D</b>iverse <b>G</b>enomic <b>E</b>quity
   </div>
@@ -257,7 +236,10 @@
 <section id="overview">
   <div class="sec-inner">
     <p class="section-label">Overview</p>
-    <h2 class="section-title">Bridging <span style="color:var(--accent2)">Genomics</span> and <span style="color:var(--accent)">Equitable</span> Science</h2>
+    <h2 class="section-title">
+      Bridging <span style="color:var(--accent2)">Genomics</span> and
+      <span style="color:var(--accent)">Equitable</span> Science
+    </h2>
     <div class="divider"></div>
     <p class="overview-lead">
       Our research sits at the intersection of
@@ -278,8 +260,26 @@
       inequitable model performance across diverse populations.
       We aim to build debiasing frameworks that close this gap.
     </p>
+    <div class="overview-stats">
+      <div class="stat-card">
+        <span class="stat-num">22+</span>
+        <span class="stat-label">Peer-Reviewed Publications</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num green">3</span>
+        <span class="stat-label">Open-Source Tools<br/>(BALLI · COBRA · ONETOOL)</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num orange">2</span>
+        <span class="stat-label">Registered Patents<br/>(Korea, 2025)</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Complex Diseases Studied</span>
+      </div>
+    </div>
   </div>
-  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2026 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <!-- RESEARCH -->
@@ -314,7 +314,7 @@
       </div>
     </div>
   </div>
-  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2026 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <!-- PUBLICATIONS -->
@@ -323,8 +323,11 @@
     <p class="section-label">Publications</p>
     <h2 class="section-title">Selected Work</h2>
     <div class="divider"></div>
+
+    <!-- ② Papers -->
+    <p class="pub-section-title">📄 Journal Articles</p>
     <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.2rem;">
-      First-author and corresponding-author publications only. &nbsp;
+      First-author and corresponding-author only. &nbsp;
       <span class="pub-badge first">Co-First</span>
       <span class="pub-badge corr">Corresponding</span>
       <span class="pub-badge rev">Revision Invited</span>
@@ -332,74 +335,161 @@
     <ul class="pub-list">
       <li>
         <span class="pub-title">COBRA: Cell-type-specific Orthogonal Batch effect Removal Algorithm in single cell RNA-sequencing data
-          <span class="pub-badge rev">Revision Invited</span><span class="pub-badge corr">Corresponding</span>
-        </span>
+          <span class="pub-badge rev">Revision Invited</span><span class="pub-badge corr">Corresponding</span></span>
         Seo S, Won S†, <span class="pub-me">Park K†</span><br/>
         <span class="pub-journal">Under Review</span>
       </li>
       <li>
         <span class="pub-title">Comparative Transcriptomic Profiling of Mesenchymal Stem Cells from Distinct Tissue Origins and Isolation Methods Highlights the Stability and Immunomodulatory Signature of Umbilical Cord-Derived Smumf Cells
-          <span class="pub-year">2026</span><span class="pub-badge first">Co-First</span>
-        </span>
+          <span class="pub-year">2026</span><span class="pub-badge first">Co-First</span></span>
         Lee MJ*, <span class="pub-me">Park K*</span>, Won S†, Jo CH†<br/>
         <span class="pub-journal">Tissue Engineering and Regenerative Medicine</span>
       </li>
       <li>
         <span class="pub-title">Novel Genetic Loci for Nontuberculous Mycobacterial Pulmonary Disease and Potential Protective Effect of Body Mass Index
-          <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span>
-        </span>
+          <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span></span>
         <span class="pub-me">Park K*</span>, Kim H*, Huh HJ*, Namkoong H, Hasegawa N, Nishimura T, Asakura T, Morimoto K, Kurashima A, Omae Y, Kawai Y, Tokunaga K, Cho J, Yim JJ, Won S†, Jhun BW†, Won HH†<br/>
         <span class="pub-journal">American Journal of Respiratory and Critical Care Medicine</span>
       </li>
       <li>
         <span class="pub-title">rs762855 Single Nucleotide Polymorphism Modulates the Risk for Diffuse-Type Gastric Cancer in Females: A Genome-Wide Association Study in the Korean Population
-          <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span>
-        </span>
+          <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span></span>
         <span class="pub-me">Park K*</span>, Shin CM*, Song CH, Ohn JH, Lee S, Park JH, Yie GE, Kang SJ, Kim JS, Lee DH, Kim N†<br/>
         <span class="pub-journal">Gastric Cancer</span>
       </li>
       <li>
         <span class="pub-title">Single-Cell RNA Sequencing Reveals Transcriptional Changes in Circulating Immune Cells from Patients with Severe Asthma Induced by Biologics
-          <span class="pub-year">2024</span><span class="pub-badge first">Co-First</span>
-        </span>
+          <span class="pub-year">2024</span><span class="pub-badge first">Co-First</span></span>
         <span class="pub-me">Park K*</span>, Lee JH*, Shin E, Jang HY, Song WJ, Kwon HS, Cho YS, Lee JE, Adcock I, Chung KF, Lee JS†, Won S†, Kim TB†<br/>
         <span class="pub-journal">Experimental &amp; Molecular Medicine</span>
       </li>
       <li>
         <span class="pub-title">Genome-Wide Association Study Implicates the Role of TBXAS1 in the Pathogenesis of Depressive Symptoms among the Korean Population
-          <span class="pub-year">2024</span>
-        </span>
+          <span class="pub-year">2024</span></span>
         <span class="pub-me">Park K</span>, Do AR, Chung Y, Kim MJ, Rhee SJ, Yoon DH, Choi SH, Cho SJ, Kim HN†, Ahn YM†, Won S†<br/>
         <span class="pub-journal">Translational Psychiatry</span>
       </li>
       <li>
         <span class="pub-title">rs2671655 Single Nucleotide Polymorphism Modulates the Risk for Gastric Cancer in Helicobacter pylori-Infected Individuals: A Genome-Wide Association Study in the Korean Population
-          <span class="pub-year">2022</span><span class="pub-badge first">Co-First</span>
-        </span>
+          <span class="pub-year">2022</span><span class="pub-badge first">Co-First</span></span>
         Shin CM*, <span class="pub-me">Park K*</span>, Ohn JH, Lee S, Park JH, Kang SJ, Kim JS, Lee DH, Kim N†<br/>
         <span class="pub-journal">Gastric Cancer</span>
       </li>
       <li>
         <span class="pub-title">Genome-Wide Association Study of Non-Tuberculous Mycobacterial Pulmonary Disease
-          <span class="pub-year">2021</span><span class="pub-badge first">Co-First</span>
-        </span>
+          <span class="pub-year">2021</span><span class="pub-badge first">Co-First</span></span>
         Cho J*, <span class="pub-me">Park K*</span>, Choi SM, Lee J, Lee CH, Lee JK, Heo EY, Kim DK, Lee YJ, Park JS, Cho YJ, Yoon HI, Lee JH, Lee CT, Kim N, Choi KY, Lee KH, Sung J, Won S†, Yim JJ†<br/>
         <span class="pub-journal">Thorax</span>
       </li>
       <li>
         <span class="pub-title">BALLI: Bartlett-Adjusted Likelihood-Based Linear Model Approach for Identifying Differentially Expressed Genes with RNA-seq Data
-          <span class="pub-year">2019</span>
-        </span>
+          <span class="pub-year">2019</span></span>
         <span class="pub-me">Park K</span>, An J, Gim J, Seo M, Lee W, Park T, Won S†<br/>
         <span class="pub-journal">BMC Genomics</span>
       </li>
     </ul>
-    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:1.2rem;">* equally contributed · † corresponding author</p>
+    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:1rem;">* equally contributed · † corresponding author</p>
     <a class="scholar-btn" href="https://scholar.google.com/citations?user=6CAaxTkAAAAJ&hl=ko" target="_blank">
       📄 &nbsp; View Full Publication List on Google Scholar →
     </a>
+
+    <!-- ② Patents -->
+    <p class="pub-section-title" style="margin-top:2.8rem;">🔐 Patents</p>
+    <ul class="pub-list">
+      <li>
+        <span class="pub-title">Composition for predicting or diagnosing gastric cancer related to Helicobacter pylori infection comprising single nucleotide polymorphism detection agent
+          <span class="pub-year">2025</span></span>
+        Patent No. 10-2757562 · Republic of Korea
+      </li>
+      <li>
+        <span class="pub-title">Single nucleotide polymorphisms for the diagnosis of depression and uses thereof
+          <span class="pub-year">2025</span></span>
+        Patent No. 10-2883401 · Republic of Korea
+      </li>
+    </ul>
   </div>
-  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2026 BRIDGE Lab · Jeonbuk National University</div>
+</section>
+
+<!-- ① SOFTWARE (new tab) -->
+<section id="software">
+  <div class="sec-inner wide">
+    <p class="section-label">Software</p>
+    <h2 class="section-title">Open-Source Tools</h2>
+    <div class="divider"></div>
+    <div class="sw-cards">
+
+      <div class="sw-card">
+        <div class="sw-card-header">
+          <span class="sw-icon">⚙️</span>
+          <div>
+            <span class="sw-name">BALLI</span>
+            <span class="sw-lang">R</span>
+          </div>
+        </div>
+        <p class="sw-desc">
+          Bartlett-Adjusted Likelihood-Based Linear model approach for Identifying
+          differentially expressed genes with RNA-seq data. Designed for correlated
+          samples (e.g., family-based or repeated-measure designs) where standard
+          methods underperform.
+        </p>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.8rem;">
+          Park K, An J, Gim J et al. · <em>BMC Genomics</em> 2019
+        </p>
+        <div class="sw-links">
+          <a class="sw-link" href="https://github.com/hanbin973/BALLI" target="_blank">GitHub →</a>
+          <a class="sw-link" href="https://doi.org/10.1186/s12864-019-5894-6" target="_blank">Paper →</a>
+        </div>
+      </div>
+
+      <div class="sw-card">
+        <div class="sw-card-header">
+          <span class="sw-icon">🔬</span>
+          <div>
+            <span class="sw-name">COBRA</span>
+            <span class="sw-lang">R</span>
+            <span class="sw-badge rev">Revision Invited</span>
+          </div>
+        </div>
+        <p class="sw-desc">
+          Cell-type-specific Orthogonal Batch effect Removal Algorithm for
+          single-cell RNA-seq data. Corrects batch effects while preserving
+          cell-type-specific biological signals — enabling robust cross-batch
+          comparisons in large scRNA-seq studies.
+        </p>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.8rem;">
+          Seo S, Won S†, Park K† · <em>Under Review</em>
+        </p>
+        <div class="sw-links">
+          <a class="sw-link" href="#" target="_blank">GitHub (coming soon)</a>
+        </div>
+      </div>
+
+      <div class="sw-card">
+        <div class="sw-card-header">
+          <span class="sw-icon">🧮</span>
+          <div>
+            <span class="sw-name">ONETOOL</span>
+            <span class="sw-lang orange">C++</span>
+          </div>
+        </div>
+        <p class="sw-desc">
+          Comprehensive software for the analysis of family-based big data.
+          Supports a wide range of family-based association tests, heritability
+          estimation, and linkage analyses at biobank scale.
+        </p>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.8rem;">
+          Song YE, Lee S, Park K et al. · <em>Bioinformatics</em> 2018
+        </p>
+        <div class="sw-links">
+          <a class="sw-link" href="https://github.com/SunghoWon/onetool" target="_blank">GitHub →</a>
+          <a class="sw-link" href="https://doi.org/10.1093/bioinformatics/bty180" target="_blank">Paper →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="sec-footer">© 2026 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <!-- ABOUT -->
@@ -409,20 +499,36 @@
     <h2 class="section-title">Our Team</h2>
     <div class="divider"></div>
 
-    <p class="about-sub">Principal Investigator</p>
+    <p class="about-sub" style="margin-top:0;">Principal Investigator</p>
+    <!-- ③ Education moved inside PI card -->
     <div class="pi-card">
-      <div style="text-align:center;"><div class="pi-avatar">👤</div></div>
-      <div>
-        <div class="pi-name">Kyungtaek Park, Ph.D.</div>
-        <div class="pi-role">Assistant Professor</div>
-        <div class="pi-inst">Department of Statistics, Jeonbuk National University</div>
-        <p class="pi-bio">A statistical geneticist whose work spans population genomics and equitable AI — building methods that are scientifically rigorous and broadly applicable across diverse human populations.</p>
+      <div class="pi-left">
+        <div class="pi-avatar">👤</div>
         <div class="pi-links">
           <a href="mailto:qkrrudxor147@gmail.com">✉ Email</a>
           <a href="https://scholar.google.com/citations?user=6CAaxTkAAAAJ&hl=ko" target="_blank">Google Scholar</a>
           <a href="#">PubMed</a>
           <a href="#">GitHub</a>
         </div>
+      </div>
+      <div>
+        <div class="pi-name">Kyungtaek Park, Ph.D.</div>
+        <div class="pi-role">Assistant Professor</div>
+        <div class="pi-inst">Department of Statistics, Jeonbuk National University</div>
+        <p class="pi-bio">A statistical geneticist whose work spans population genomics and equitable AI — building methods that are scientifically rigorous and broadly applicable across diverse human populations.</p>
+        <p class="pi-edu-title">Education</p>
+        <ul class="pi-edu-list">
+          <li>
+            <span class="deg">Ph.D. · Interdisciplinary Program of Bioinformatics</span>
+            Seoul National University &nbsp;<span class="yr">2015 – 2021</span><br/>
+            Advisor: Prof. Sungho Won
+          </li>
+          <li>
+            <span class="deg">B.S. · Biological Sciences</span>
+            Seoul National University &nbsp;<span class="yr">2009 – 2015</span><br/>
+            Minor: Business Administration, Brain-Mind-Behavior
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -450,27 +556,8 @@
         <h4 style="color:var(--accent);">Research Assistant</h4><p>Position Open</p>
       </div>
     </div>
-
-    <p class="about-sub">Education</p>
-    <ul class="info-list">
-      <li><span class="lbl">Ph.D. · Bioinformatics · Seoul National University <span class="yr">2015 – 2021</span></span>Advisor: Prof. Sungho Won</li>
-      <li><span class="lbl">B.S. · Biological Sciences · Seoul National University <span class="yr">2009 – 2015</span></span>Minor: Business Administration, Brain-Mind-Behavior</li>
-    </ul>
-
-    <p class="about-sub">Software</p>
-    <ul class="info-list">
-      <li><span class="lbl">BALLI <span class="yr">R</span></span>Differential expression for correlated RNA-seq data</li>
-      <li><span class="lbl">COBRA <span class="yr">R · Revision Invited</span></span>Cell-type-specific batch effect removal for scRNA-seq</li>
-      <li><span class="lbl">ONETOOL <span class="yr">C++</span></span>Family-based big data analysis</li>
-    </ul>
-
-    <p class="about-sub">Patents</p>
-    <ul class="info-list">
-      <li><span class="lbl">10-2757562 · Korea · 2025</span>Composition for predicting or diagnosing gastric cancer related to Helicobacter pylori infection comprising single nucleotide polymorphism detection agent</li>
-      <li><span class="lbl">10-2883401 · Korea · 2025</span>Single nucleotide polymorphisms for the diagnosis of depression and uses thereof</li>
-    </ul>
   </div>
-  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2026 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <!-- CONTACT -->
@@ -495,11 +582,11 @@
       <strong>We are actively recruiting motivated MS and PhD students.</strong>
     </div>
   </div>
-  <div class="sec-footer">© 2025 BRIDGE Lab · Jeonbuk National University</div>
+  <div class="sec-footer">© 2026 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
 <script>
-  const ids = ['home','overview','research','publications','about','contact'];
+  const ids = ['home','overview','research','publications','software','about','contact'];
 
   function navTo(id) {
     const el = document.getElementById(id);
@@ -536,7 +623,7 @@
     const curIdx = ids.indexOf(cur);
     const rect   = curEl.getBoundingClientRect();
     const scrolledPast = Math.max(0, navH - rect.top) / curEl.offsetHeight;
-    if (e.deltaY > 0 && scrolledPast > 0.80 && curIdx < ids.length - 1) {
+    if (e.deltaY > 0 && scrolledPast > 0.72 && curIdx < ids.length - 1) {
       scrollLock = true;
       navTo(ids[curIdx + 1]);
       setTimeout(() => { scrollLock = false; }, 900);
@@ -546,13 +633,6 @@
       setTimeout(() => { scrollLock = false; }, 900);
     }
   }, { passive:true });
-
-  function setTheme(theme) {
-    document.body.className = theme === 'default' ? '' : 'theme-' + theme;
-    document.querySelectorAll('.theme-dot').forEach(d => {
-      d.classList.toggle('active', d.dataset.theme === theme);
-    });
-  }
 </script>
 </body>
 </html>
