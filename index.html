@@ -69,12 +69,11 @@
     .hero-sub { max-width:640px; margin:0 auto 2rem; color:var(--text-muted); font-size:1.02rem; line-height:1.8; }
     .hero-sub strong { color:var(--text-main); }
 
-    /* keyword pills */
     .pill-row { display:flex; gap:0.7rem; flex-wrap:wrap; justify-content:center; margin-bottom:2.8rem; }
     .pill { background:var(--bg-card); border:1px solid var(--border); border-radius:99px; padding:0.3rem 0.9rem; font-size:0.8rem; font-weight:600; color:var(--text-muted); }
-    .pill.blue  { border-color:rgba(88,166,255,0.4);  color:var(--accent); }
-    .pill.green { border-color:rgba(63,185,80,0.4);   color:var(--accent2); }
-    .pill.orange{ border-color:rgba(240,136,62,0.4);  color:var(--accent3); }
+    .pill.blue   { border-color:rgba(88,166,255,0.4);  color:var(--accent); }
+    .pill.green  { border-color:rgba(63,185,80,0.4);   color:var(--accent2); }
+    .pill.orange { border-color:rgba(240,136,62,0.4);  color:var(--accent3); }
 
     .btn { display:inline-block; padding:0.72rem 1.8rem; border-radius:8px; font-weight:600; font-size:0.92rem; cursor:pointer; transition:all .2s; font-family:'Open Sans',sans-serif; border:none; text-decoration:none; }
     .btn-primary { background:var(--accent); color:#0d1117; }
@@ -83,21 +82,13 @@
     .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
 
     /* OVERVIEW */
-    .overview-lead {
-      font-size:1.08rem; color:var(--text-main); line-height:1.85; margin-bottom:1rem;
-      font-weight:400;
-    }
+    .overview-lead { font-size:1.08rem; color:var(--text-main); line-height:1.85; margin-bottom:1rem; }
     .overview-body { font-size:0.95rem; color:var(--text-muted); line-height:1.9; }
     .overview-body strong { color:var(--text-main); }
-
-    /* highlight box */
     .highlight-box {
-      margin-top:2rem;
-      background:rgba(88,166,255,0.06);
-      border-left:3px solid var(--accent);
-      border-radius:0 8px 8px 0;
-      padding:1.2rem 1.4rem;
-      font-size:0.93rem; color:var(--text-muted); line-height:1.8;
+      margin-top:2rem; background:rgba(88,166,255,0.06);
+      border-left:3px solid var(--accent); border-radius:0 8px 8px 0;
+      padding:1.2rem 1.4rem; font-size:0.93rem; color:var(--text-muted); line-height:1.8;
     }
     .highlight-box strong { color:var(--accent); }
 
@@ -109,18 +100,31 @@
     .card h3 { font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:700; color:var(--accent); margin-bottom:0.5rem; }
     .card p { font-size:0.87rem; color:var(--text-muted); line-height:1.75; }
     .tag { display:inline-block; font-size:0.7rem; font-weight:700; padding:0.1rem 0.5rem; border-radius:4px; margin-right:0.3rem; margin-bottom:0.6rem; }
-    .tag.blue  { background:rgba(88,166,255,0.12); color:var(--accent); }
-    .tag.green { background:rgba(63,185,80,0.12);  color:var(--accent2); }
-    .tag.orange{ background:rgba(240,136,62,0.12); color:var(--accent3); }
+    .tag.blue   { background:rgba(88,166,255,0.12); color:var(--accent); }
+    .tag.green  { background:rgba(63,185,80,0.12);  color:var(--accent2); }
+    .tag.orange { background:rgba(240,136,62,0.12); color:var(--accent3); }
 
     /* PUBLICATIONS */
     .pub-list { list-style:none; }
-    .pub-list li { padding:0.95rem 0; border-bottom:1px solid var(--border); font-size:0.89rem; color:var(--text-muted); }
+    .pub-list li { padding:1rem 0; border-bottom:1px solid var(--border); font-size:0.89rem; color:var(--text-muted); }
     .pub-list li:last-child { border-bottom:none; }
-    .pub-title { font-weight:600; color:var(--text-main); display:block; margin-bottom:0.2rem; }
+    .pub-title { font-weight:600; color:var(--text-main); display:block; margin-bottom:0.25rem; line-height:1.5; }
     .pub-journal { color:var(--accent2); font-style:italic; font-size:0.83rem; }
     .pub-year { display:inline-block; background:rgba(88,166,255,0.12); color:var(--accent); font-size:0.7rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:4px; margin-left:0.4rem; }
     .pub-me { font-weight:700; color:var(--text-main); }
+    .pub-badge { display:inline-block; font-size:0.68rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:4px; margin-left:0.4rem; vertical-align:middle; }
+    .pub-badge.first { background:rgba(63,185,80,0.12); color:var(--accent2); }
+    .pub-badge.corr  { background:rgba(240,136,62,0.12); color:var(--accent3); }
+    .pub-badge.rev   { background:rgba(88,166,255,0.12); color:var(--accent); }
+
+    .scholar-btn {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      margin-top:1.8rem; padding:0.65rem 1.6rem;
+      border:1px solid var(--accent); border-radius:8px;
+      color:var(--accent); font-size:0.88rem; font-weight:600;
+      text-decoration:none; transition:all .2s;
+    }
+    .scholar-btn:hover { background:rgba(88,166,255,0.1); }
 
     /* ABOUT */
     .about-sub { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--text-main); margin:2.2rem 0 1rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); }
@@ -183,13 +187,11 @@
 <!-- ══ HOME ══ -->
 <section id="home">
   <div class="hero-eyebrow">⚖️ &nbsp; Equitable Genomics &amp; Biomedical AI</div>
-  <h1>Bridging <span class="hero-eq">Genomics</span> and<br/><span class="hero-gen">Equitable</span> AI</h1>
+  <h1><span class="hero-eq">Equitable</span> AI<br/>for <span class="hero-gen">Genomic</span> Medicine</h1>
   <div class="pill-row">
-    <span class="pill blue">GWAS</span>
-    <span class="pill blue">Bulk RNA-seq</span>
-    <span class="pill blue">scRNA-seq</span>
-    <span class="pill">Statistical Learning</span>
-    <span class="pill orange">Equity-Aware AI</span>
+    <span class="pill blue">Medical Genomics</span>
+    <span class="pill">Statistical Methods</span>
+    <span class="pill orange">Equitable AI</span>
   </div>
   <p class="hero-sub">
     We develop <strong>statistical methods and computational pipelines</strong>
@@ -211,7 +213,7 @@
     <div class="divider"></div>
     <p class="overview-lead">
       Our research sits at the intersection of <strong style="color:var(--accent)">statistical genomics</strong>
-      and <strong style="color:var(--accent2)">algorithmic fairness</strong>.
+      and <strong style="color:var(--accent3)">algorithmic fairness</strong>.
     </p>
     <p class="overview-body">
       We leverage GWAS, bulk RNA-seq, and single-cell transcriptomics to characterize
@@ -238,24 +240,21 @@
     <h2 class="section-title">Core Research Directions</h2>
     <div class="divider"></div>
     <div class="cards">
-
       <div class="card">
         <div class="card-icon">🧬</div>
         <span class="tag blue">GWAS</span><span class="tag blue">RNA-seq</span>
-        <h3>Population Genomics & Multi-Omics</h3>
+        <h3>Medical Genomics & Multi-Omics</h3>
         <p>Large-scale GWAS, bulk RNA-seq, and scRNA-seq analyses to dissect the genetic
-        and transcriptomic underpinnings of complex traits across diverse cohorts.</p>
+        and transcriptomic underpinnings of complex traits across diverse human cohorts.</p>
       </div>
-
       <div class="card">
         <div class="card-icon">⚙️</div>
         <span class="tag blue">Algorithm</span><span class="tag blue">Software</span>
-        <h3>Statistical & Computational Methods</h3>
-        <p>Novel algorithms for high-dimensional genomic data — differential expression,
-        batch correction, cell-type deconvolution — with emphasis on statistical rigor
+        <h3>Statistical Method Development</h3>
+        <p>Novel statistical algorithms for high-dimensional genomic data — differential
+        expression, batch correction, cell-type deconvolution — with emphasis on rigor
         and biobank-scale scalability.</p>
       </div>
-
       <div class="card" style="border-style:dashed; border-color:rgba(240,136,62,0.5);">
         <div class="card-icon">⚖️</div>
         <span class="tag orange">Future Direction</span>
@@ -264,7 +263,6 @@
         with focus on ancestry, sex, and demographic underrepresentation.
         Goal: debiasing frameworks for equitable predictions across population strata.</p>
       </div>
-
     </div>
   </div>
   <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
@@ -276,37 +274,112 @@
     <p class="section-label">Publications</p>
     <h2 class="section-title">Selected Work</h2>
     <div class="divider"></div>
+    <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.2rem;">
+      First-author and corresponding-author publications only.
+      &nbsp;<span class="pub-badge first">Co-First</span>
+      <span class="pub-badge corr">Corresponding</span>
+      <span class="pub-badge rev">Revision Invited</span>
+    </p>
+
     <ul class="pub-list">
+
       <li>
-        <span class="pub-title">Comparative Transcriptomic Profiling of Mesenchymal Stem Cells from Distinct Tissue Origins <span class="pub-year">2026</span></span>
-        Lee MJ*, <span class="pub-me">Park K*</span>, Won S†, Jo CH† · <span class="pub-journal">Tissue Engineering and Regenerative Medicine</span>
+        <span class="pub-title">
+          COBRA: Cell-type-specific Orthogonal Batch effect Removal Algorithm in single cell RNA-sequencing data
+          <span class="pub-badge rev">Revision Invited</span>
+          <span class="pub-badge corr">Corresponding</span>
+        </span>
+        Seo S, Won S†, <span class="pub-me">Park K†</span><br/>
+        <span class="pub-journal">Under Review</span>
       </li>
+
       <li>
-        <span class="pub-title">Novel Genetic Loci for Nontuberculous Mycobacterial Pulmonary Disease and Protective Effect of BMI <span class="pub-year">2025</span></span>
-        <span class="pub-me">Park K*</span>, Kim H*, Huh HJ* et al. · <span class="pub-journal">American Journal of Respiratory and Critical Care Medicine</span>
+        <span class="pub-title">
+          Comparative Transcriptomic Profiling of Mesenchymal Stem Cells from Distinct Tissue Origins and Isolation Methods Highlights the Stability and Immunomodulatory Signature of Umbilical Cord-Derived Smumf Cells
+          <span class="pub-year">2026</span>
+          <span class="pub-badge first">Co-First</span>
+        </span>
+        Lee MJ*, <span class="pub-me">Park K*</span>, Won S†, Jo CH†<br/>
+        <span class="pub-journal">Tissue Engineering and Regenerative Medicine</span>
       </li>
+
       <li>
-        <span class="pub-title">rs762855 SNP Modulates Risk for Diffuse-Type Gastric Cancer in Females <span class="pub-year">2025</span></span>
-        <span class="pub-me">Park K*</span>, Shin CM* et al. · <span class="pub-journal">Gastric Cancer</span>
+        <span class="pub-title">
+          Novel Genetic Loci for Nontuberculous Mycobacterial Pulmonary Disease and Potential Protective Effect of Body Mass Index
+          <span class="pub-year">2025</span>
+          <span class="pub-badge first">Co-First</span>
+        </span>
+        <span class="pub-me">Park K*</span>, Kim H*, Huh HJ* et al., Won S†, Jhun BW†, Won HH†<br/>
+        <span class="pub-journal">American Journal of Respiratory and Critical Care Medicine</span>
       </li>
+
       <li>
-        <span class="pub-title">scRNA-seq Reveals Transcriptional Changes in Circulating Immune Cells in Severe Asthma under Biologics <span class="pub-year">2024</span></span>
-        <span class="pub-me">Park K*</span>, Lee JH* et al. · <span class="pub-journal">Experimental &amp; Molecular Medicine</span>
+        <span class="pub-title">
+          rs762855 Single Nucleotide Polymorphism Modulates the Risk for Diffuse-Type Gastric Cancer in Females: A Genome-Wide Association Study in the Korean Population
+          <span class="pub-year">2025</span>
+          <span class="pub-badge first">Co-First</span>
+        </span>
+        <span class="pub-me">Park K*</span>, Shin CM* et al., Kim N†, Lee DH<br/>
+        <span class="pub-journal">Gastric Cancer</span>
       </li>
+
       <li>
-        <span class="pub-title">GWAS Implicates TBXAS1 in Depressive Symptoms among the Korean Population <span class="pub-year">2024</span></span>
-        <span class="pub-me">Park K</span>, Do AR et al. · <span class="pub-journal">Translational Psychiatry</span>
+        <span class="pub-title">
+          Single-Cell RNA Sequencing Reveals Transcriptional Changes in Circulating Immune Cells from Patients with Severe Asthma Induced by Biologics
+          <span class="pub-year">2024</span>
+          <span class="pub-badge first">Co-First</span>
+        </span>
+        <span class="pub-me">Park K*</span>, Lee JH* et al., Lee JS†, Won S†, Kim TB†<br/>
+        <span class="pub-journal">Experimental &amp; Molecular Medicine</span>
       </li>
+
       <li>
-        <span class="pub-title">rs2671655 SNP Modulates Gastric Cancer Risk in H. pylori-Infected Individuals <span class="pub-year">2022</span></span>
-        Shin CM*, <span class="pub-me">Park K*</span>, Kim N† et al. · <span class="pub-journal">Gastric Cancer</span>
+        <span class="pub-title">
+          Genome-Wide Association Study Implicates the Role of TBXAS1 in the Pathogenesis of Depressive Symptoms among the Korean Population
+          <span class="pub-year">2024</span>
+        </span>
+        <span class="pub-me">Park K</span>, Do AR, Chung Y et al., Kim HN†, Ahn YM†, Won S†<br/>
+        <span class="pub-journal">Translational Psychiatry</span>
       </li>
+
       <li>
-        <span class="pub-title">BALLI: Bartlett-Adjusted Likelihood-Based Linear Model for Differential Expression in RNA-seq <span class="pub-year">2019</span></span>
-        <span class="pub-me">Park K</span>, An J, Gim J et al. · <span class="pub-journal">BMC Genomics</span>
+        <span class="pub-title">
+          rs2671655 Single Nucleotide Polymorphism Modulates the Risk for Gastric Cancer in Helicobacter pylori-Infected Individuals: A Genome-Wide Association Study in the Korean Population
+          <span class="pub-year">2022</span>
+          <span class="pub-badge first">Co-First</span>
+        </span>
+        Shin CM*, <span class="pub-me">Park K*</span>, Kim N† et al.<br/>
+        <span class="pub-journal">Gastric Cancer</span>
       </li>
+
+      <li>
+        <span class="pub-title">
+          Genome-Wide Association Study of Non-Tuberculous Mycobacterial Pulmonary Disease
+          <span class="pub-year">2021</span>
+          <span class="pub-badge first">Co-First</span>
+        </span>
+        Cho J*, <span class="pub-me">Park K*</span> et al., Won S†, Yim JJ†<br/>
+        <span class="pub-journal">Thorax</span>
+      </li>
+
+      <li>
+        <span class="pub-title">
+          BALLI: Bartlett-Adjusted Likelihood-Based Linear Model Approach for Identifying Differentially Expressed Genes with RNA-seq Data
+          <span class="pub-year">2019</span>
+        </span>
+        <span class="pub-me">Park K</span>, An J, Gim J et al., Won S†<br/>
+        <span class="pub-journal">BMC Genomics</span>
+      </li>
+
     </ul>
+
     <p style="font-size:0.8rem; color:var(--text-muted); margin-top:1.2rem;">* equally contributed · † corresponding author</p>
+
+    <a class="scholar-btn"
+       href="https://scholar.google.com/citations?user=6CAaxTkAAAAJ&hl=ko"
+       target="_blank">
+      📄 &nbsp; View Full Publication List on Google Scholar →
+    </a>
   </div>
   <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
 </section>
@@ -334,7 +407,7 @@
         </p>
         <div class="pi-links">
           <a href="mailto:qkrrudxor147@gmail.com">✉ Email</a>
-          <a href="#">Google Scholar</a>
+          <a href="https://scholar.google.com/citations?user=6CAaxTkAAAAJ&hl=ko" target="_blank">Google Scholar</a>
           <a href="#">PubMed</a>
           <a href="#">GitHub</a>
         </div>
@@ -363,11 +436,11 @@
     <p class="about-sub">Education</p>
     <ul class="info-list">
       <li>
-        <span class="lbl">Ph.D. · Bioinformatics · Seoul National University <span class="yr">2015–2021</span></span>
+        <span class="lbl">Ph.D. · Bioinformatics · Seoul National University <span class="yr">2015 – 2021</span></span>
         Advisor: Prof. Sungho Won
       </li>
       <li>
-        <span class="lbl">B.S. · Biological Sciences · Seoul National University <span class="yr">2009–2015</span></span>
+        <span class="lbl">B.S. · Biological Sciences · Seoul National University <span class="yr">2009 – 2015</span></span>
         Minor: Business Administration, Brain-Mind-Behavior
       </li>
     </ul>
@@ -381,8 +454,8 @@
 
     <p class="about-sub">Patents</p>
     <ul class="info-list">
-      <li><span class="lbl">10-2757562 · Korea · 2025</span> SNP-based prediction of H. pylori-related gastric cancer</li>
-      <li><span class="lbl">10-2883401 · Korea · 2025</span> SNP markers for the diagnosis of depression</li>
+      <li><span class="lbl">10-2757562 · Korea · 2025</span> Composition for predicting or diagnosing gastric cancer related to Helicobacter pylori infection comprising single nucleotide polymorphism detection agent</li>
+      <li><span class="lbl">10-2883401 · Korea · 2025</span> Single nucleotide polymorphisms for the diagnosis of depression and uses thereof</li>
     </ul>
 
   </div>
@@ -401,7 +474,7 @@
       <p>📍 Jeonju, Republic of Korea</p>
     </div>
     <div class="social-links">
-      <a href="#">Google Scholar</a>
+      <a href="https://scholar.google.com/citations?user=6CAaxTkAAAAJ&hl=ko" target="_blank">Google Scholar</a>
       <a href="#">PubMed</a>
       <a href="#">GitHub</a>
       <a href="#">LinkedIn</a>
