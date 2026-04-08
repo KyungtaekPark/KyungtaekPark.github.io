@@ -12,10 +12,9 @@
       --accent:#58a6ff; --accent2:#3fb950; --accent3:#f0883e;
       --text-main:#e6edf3; --text-muted:#8b949e; --border:#30363d; --nav-h:64px;
     }
-    html { scroll-snap-type:y proximity; }
+    html { scroll-behavior:smooth; }
     body { font-family:'Open Sans',sans-serif; background:var(--bg-dark); color:var(--text-main); line-height:1.7; overflow-x:hidden; }
 
-    /* NAV */
     nav {
       position:fixed; top:0; left:0; right:0; z-index:100; height:var(--nav-h);
       background:rgba(13,17,23,0.96); backdrop-filter:blur(8px);
@@ -28,19 +27,17 @@
     .nav-links button {
       background:none; border:none; cursor:pointer; color:var(--text-muted);
       font-size:0.85rem; font-weight:600; font-family:'Open Sans',sans-serif;
-      padding:0.45rem 0.85rem; border-radius:6px; transition:color .2s,background .2s;
+      padding:0.45rem 0.9rem; border-radius:6px; transition:color .2s,background .2s;
     }
     .nav-links button:hover { color:var(--text-main); background:rgba(255,255,255,0.05); }
     .nav-links button.active { color:var(--accent); background:rgba(88,166,255,0.08); }
 
-    /* SECTIONS */
-    section { min-height:100vh; display:flex; flex-direction:column; padding-top:var(--nav-h); scroll-snap-align:start; }
+    section { min-height:100vh; display:flex; flex-direction:column; padding-top:var(--nav-h); }
     #overview     { background:var(--bg-card); border-top:1px solid var(--border); }
     #research     { background:var(--bg-dark); border-top:1px solid var(--border); }
     #publications { background:var(--bg-card); border-top:1px solid var(--border); }
-    #software     { background:var(--bg-dark); border-top:1px solid var(--border); }
-    #about        { background:var(--bg-card); border-top:1px solid var(--border); }
-    #contact      { background:var(--bg-dark); border-top:1px solid var(--border); }
+    #people       { background:var(--bg-dark); border-top:1px solid var(--border); }
+    #contact      { background:var(--bg-card); border-top:1px solid var(--border); }
 
     .sec-inner { max-width:960px; width:100%; margin:0 auto; padding:2.5rem 2rem 4rem; flex:1; }
     .sec-inner.wide { max-width:1080px; }
@@ -104,8 +101,7 @@
     .tag.blue   { background:rgba(88,166,255,0.12); color:var(--accent); }
 
     /* PUBLICATIONS */
-    .pub-section-title { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--text-main); margin:2rem 0 0.9rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); }
-    .pub-section-title:first-of-type { margin-top:0; }
+    .pub-section-title { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--text-main); margin:2.4rem 0 0.9rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); }
     .pub-list { list-style:none; }
     .pub-list li { padding:1rem 0; border-bottom:1px solid var(--border); font-size:0.89rem; color:var(--text-muted); }
     .pub-list li:last-child { border-bottom:none; }
@@ -117,28 +113,27 @@
     .pub-badge.first { background:rgba(63,185,80,0.12);  color:var(--accent2); }
     .pub-badge.corr  { background:rgba(240,136,62,0.12); color:var(--accent3); }
     .pub-badge.rev   { background:rgba(88,166,255,0.12); color:var(--accent); }
+    .pub-badge.prep  { background:rgba(240,136,62,0.12); color:var(--accent3); }
     .scholar-btn { display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.8rem; padding:0.65rem 1.6rem; border:1px solid var(--accent); border-radius:8px; color:var(--accent); font-size:0.88rem; font-weight:600; text-decoration:none; transition:all .2s; }
     .scholar-btn:hover { background:rgba(88,166,255,0.1); }
 
-    /* SOFTWARE */
-    .sw-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.4rem; }
-    .sw-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.8rem; transition:border-color .25s,transform .25s; }
-    .sw-card:hover { border-color:var(--accent2); transform:translateY(-4px); }
-    .sw-card-header { display:flex; align-items:center; gap:0.8rem; margin-bottom:0.8rem; }
-    .sw-icon { font-size:1.6rem; }
-    .sw-name { font-family:'Montserrat',sans-serif; font-size:1.1rem; font-weight:700; color:var(--text-main); }
-    .sw-lang { display:inline-block; background:rgba(63,185,80,0.12); color:var(--accent2); font-size:0.72rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:4px; margin-left:0.4rem; }
-    .sw-lang.orange { background:rgba(240,136,62,0.12); color:var(--accent3); }
-    .sw-desc { font-size:0.88rem; color:var(--text-muted); line-height:1.75; margin-bottom:1rem; }
+    /* SOFTWARE cards inside Publications */
+    .sw-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1.2rem; }
+    .sw-card { background:var(--bg-dark); border:1px solid var(--border); border-radius:12px; padding:1.6rem; transition:border-color .25s,transform .25s; }
+    .sw-card:hover { border-color:var(--accent2); transform:translateY(-3px); }
+    .sw-card-header { display:flex; align-items:center; gap:0.7rem; margin-bottom:0.7rem; }
+    .sw-icon { font-size:1.5rem; }
+    .sw-name { font-family:'Montserrat',sans-serif; font-size:1.05rem; font-weight:700; color:var(--text-main); }
+    .sw-lang { display:inline-block; background:rgba(63,185,80,0.12); color:var(--accent2); font-size:0.7rem; font-weight:700; padding:0.12rem 0.45rem; border-radius:4px; margin-left:0.4rem; }
+    .sw-desc { font-size:0.86rem; color:var(--text-muted); line-height:1.75; margin-bottom:0.8rem; }
+    .sw-ref  { font-size:0.78rem; color:var(--text-muted); margin-bottom:0.8rem; font-style:italic; }
     .sw-links { display:flex; gap:0.5rem; flex-wrap:wrap; }
-    .sw-link { padding:0.3rem 0.9rem; border:1px solid var(--border); border-radius:6px; font-size:0.78rem; font-weight:600; color:var(--text-muted); text-decoration:none; transition:all .2s; }
+    .sw-link { padding:0.28rem 0.85rem; border:1px solid var(--border); border-radius:6px; font-size:0.78rem; font-weight:600; color:var(--text-muted); text-decoration:none; transition:all .2s; }
     .sw-link:hover { border-color:var(--accent2); color:var(--accent2); }
-    .sw-badge { display:inline-block; font-size:0.68rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:4px; margin-left:0.3rem; }
-    .sw-badge.rev { background:rgba(88,166,255,0.12); color:var(--accent); }
 
-    /* ABOUT */
+    /* PEOPLE */
     .about-sub { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--text-main); margin:2rem 0 0.9rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); }
-    .pi-card { background:var(--bg-dark); border:1px solid var(--accent); border-radius:12px; padding:1.8rem; display:grid; grid-template-columns:140px 1fr; gap:1.8rem; align-items:start; }
+    .pi-card { background:var(--bg-card); border:1px solid var(--accent); border-radius:12px; padding:1.8rem; display:grid; grid-template-columns:140px 1fr; gap:1.8rem; align-items:start; }
     .pi-left { display:flex; flex-direction:column; align-items:center; gap:1rem; }
     .pi-avatar { width:110px; height:110px; background:var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2.6rem; overflow:hidden; }
     .pi-avatar img { width:100%; height:100%; object-fit:cover; }
@@ -149,14 +144,12 @@
     .pi-role { color:var(--accent); font-size:0.85rem; font-weight:600; margin-bottom:0.1rem; }
     .pi-inst { color:var(--text-muted); font-size:0.82rem; margin-bottom:0.9rem; }
     .pi-bio  { color:var(--text-muted); font-size:0.88rem; line-height:1.8; margin-bottom:1.2rem; }
-    /* ③ Education 안으로 */
-    .pi-edu-title { font-family:'Montserrat',sans-serif; font-size:0.85rem; font-weight:700; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.6rem; }
+    .pi-edu-title { font-family:'Montserrat',sans-serif; font-size:0.82rem; font-weight:700; color:var(--text-muted); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.6rem; }
     .pi-edu-list { list-style:none; }
     .pi-edu-list li { padding:0.5rem 0; border-bottom:1px solid var(--border); font-size:0.84rem; color:var(--text-muted); }
     .pi-edu-list li:last-child { border-bottom:none; }
     .pi-edu-list .deg { font-weight:700; color:var(--text-main); display:block; }
     .pi-edu-list .yr  { color:var(--accent); font-size:0.78rem; }
-
     .hiring-box { background:rgba(88,166,255,0.05); border:1px dashed rgba(88,166,255,0.4); border-radius:12px; padding:1.4rem 1.8rem; margin-bottom:1.2rem; }
     .hiring-box h4 { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--accent); margin-bottom:0.5rem; }
     .hiring-box p { font-size:0.87rem; color:var(--text-muted); line-height:1.8; }
@@ -164,7 +157,7 @@
     .hiring-box a { color:var(--accent); text-decoration:none; }
     .hiring-box a:hover { text-decoration:underline; }
     .member-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; margin-top:0.8rem; }
-    .member-card { background:var(--bg-dark); border:1px solid var(--border); border-radius:12px; padding:1.4rem 1rem; text-align:center; }
+    .member-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.4rem 1rem; text-align:center; }
     .member-avatar { width:64px; height:64px; background:var(--border); border-radius:50%; margin:0 auto 0.8rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; }
     .member-card h4 { font-size:0.88rem; font-weight:700; margin-bottom:0.2rem; }
     .member-card p  { font-size:0.77rem; color:var(--text-muted); }
@@ -182,7 +175,7 @@
 
     @media(max-width:720px) {
       .pi-card { grid-template-columns:1fr; }
-      .pi-left { flex-direction:row; align-items:flex-start; }
+      .pi-left { flex-direction:row; }
       .pi-links { flex-direction:row; flex-wrap:wrap; width:auto; }
       .nav-links button { padding:0.4rem 0.5rem; font-size:0.76rem; }
     }
@@ -199,8 +192,7 @@
     <li><button onclick="navTo('overview')"     id="btn-overview">Overview</button></li>
     <li><button onclick="navTo('research')"     id="btn-research">Research</button></li>
     <li><button onclick="navTo('publications')" id="btn-publications">Publications</button></li>
-    <li><button onclick="navTo('software')"     id="btn-software">Software</button></li>
-    <li><button onclick="navTo('about')"        id="btn-about">About</button></li>
+    <li><button onclick="navTo('people')"       id="btn-people">People</button></li>
     <li><button onclick="navTo('contact')"      id="btn-contact">Contact</button></li>
   </ul>
 </nav>
@@ -267,7 +259,7 @@
       </div>
       <div class="stat-card">
         <span class="stat-num green">3</span>
-        <span class="stat-label">Open-Source Tools<br/>(BALLI · COBRA · ONETOOL)</span>
+        <span class="stat-label">Open-Source Tools<br/>(BALLI · COBRA · LASER)</span>
       </div>
       <div class="stat-card">
         <span class="stat-num orange">2</span>
@@ -324,7 +316,7 @@
     <h2 class="section-title">Selected Work</h2>
     <div class="divider"></div>
 
-    <!-- ② Papers -->
+    <!-- Journal Articles -->
     <p class="pub-section-title">📄 Journal Articles</p>
     <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.2rem;">
       First-author and corresponding-author only. &nbsp;
@@ -393,7 +385,52 @@
       📄 &nbsp; View Full Publication List on Google Scholar →
     </a>
 
-    <!-- ② Patents -->
+    <!-- Software -->
+    <p class="pub-section-title" style="margin-top:2.8rem;">🛠️ Software</p>
+    <div class="sw-cards">
+      <div class="sw-card">
+        <div class="sw-card-header">
+          <span class="sw-icon">⚙️</span>
+          <div><span class="sw-name">BALLI</span><span class="sw-lang">R</span></div>
+        </div>
+        <p class="sw-desc">Bartlett-Adjusted Likelihood-Based Linear model for Identifying differentially expressed genes in correlated RNA-seq data (e.g., family-based or repeated-measure designs).</p>
+        <p class="sw-ref">Park K et al. · BMC Genomics 2019</p>
+        <div class="sw-links">
+          <a class="sw-link" href="https://github.com/hanbin973/BALLI" target="_blank">GitHub →</a>
+          <a class="sw-link" href="https://doi.org/10.1186/s12864-019-5894-6" target="_blank">Paper →</a>
+        </div>
+      </div>
+
+      <div class="sw-card">
+        <div class="sw-card-header">
+          <span class="sw-icon">🔬</span>
+          <div><span class="sw-name">COBRA</span><span class="sw-lang">R</span>
+            <span class="pub-badge rev" style="margin-left:0.3rem;">Revision Invited</span>
+          </div>
+        </div>
+        <p class="sw-desc">Cell-type-specific Orthogonal Batch effect Removal Algorithm for single-cell RNA-seq. Corrects batch effects while preserving cell-type-specific biological signals.</p>
+        <p class="sw-ref">Seo S, Won S†, Park K† · Under Review</p>
+        <div class="sw-links">
+          <a class="sw-link" href="#" style="opacity:0.5; cursor:default;">GitHub (coming soon)</a>
+        </div>
+      </div>
+
+      <div class="sw-card">
+        <div class="sw-card-header">
+          <span class="sw-icon">🔦</span>
+          <div><span class="sw-name">LASER</span><span class="sw-lang">R</span>
+            <span class="pub-badge prep" style="margin-left:0.3rem;">In Preparation</span>
+          </div>
+        </div>
+        <p class="sw-desc">Linear mixed-model framework for modeling Sample corrElation in RNA-seq differential expression analysis. Extends existing DEG frameworks to handle correlated sample structures at biobank scale.</p>
+        <p class="sw-ref">Park K†, Won S† · In Preparation</p>
+        <div class="sw-links">
+          <a class="sw-link" href="https://github.com/qkrrudxor147/LASER" target="_blank">GitHub →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patents -->
     <p class="pub-section-title" style="margin-top:2.8rem;">🔐 Patents</p>
     <ul class="pub-list">
       <li>
@@ -411,96 +448,14 @@
   <div class="sec-footer">© 2026 BRIDGE Lab · Jeonbuk National University</div>
 </section>
 
-<!-- ① SOFTWARE (new tab) -->
-<section id="software">
-  <div class="sec-inner wide">
-    <p class="section-label">Software</p>
-    <h2 class="section-title">Open-Source Tools</h2>
-    <div class="divider"></div>
-    <div class="sw-cards">
-
-      <div class="sw-card">
-        <div class="sw-card-header">
-          <span class="sw-icon">⚙️</span>
-          <div>
-            <span class="sw-name">BALLI</span>
-            <span class="sw-lang">R</span>
-          </div>
-        </div>
-        <p class="sw-desc">
-          Bartlett-Adjusted Likelihood-Based Linear model approach for Identifying
-          differentially expressed genes with RNA-seq data. Designed for correlated
-          samples (e.g., family-based or repeated-measure designs) where standard
-          methods underperform.
-        </p>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.8rem;">
-          Park K, An J, Gim J et al. · <em>BMC Genomics</em> 2019
-        </p>
-        <div class="sw-links">
-          <a class="sw-link" href="https://github.com/hanbin973/BALLI" target="_blank">GitHub →</a>
-          <a class="sw-link" href="https://doi.org/10.1186/s12864-019-5894-6" target="_blank">Paper →</a>
-        </div>
-      </div>
-
-      <div class="sw-card">
-        <div class="sw-card-header">
-          <span class="sw-icon">🔬</span>
-          <div>
-            <span class="sw-name">COBRA</span>
-            <span class="sw-lang">R</span>
-            <span class="sw-badge rev">Revision Invited</span>
-          </div>
-        </div>
-        <p class="sw-desc">
-          Cell-type-specific Orthogonal Batch effect Removal Algorithm for
-          single-cell RNA-seq data. Corrects batch effects while preserving
-          cell-type-specific biological signals — enabling robust cross-batch
-          comparisons in large scRNA-seq studies.
-        </p>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.8rem;">
-          Seo S, Won S†, Park K† · <em>Under Review</em>
-        </p>
-        <div class="sw-links">
-          <a class="sw-link" href="#" target="_blank">GitHub (coming soon)</a>
-        </div>
-      </div>
-
-      <div class="sw-card">
-        <div class="sw-card-header">
-          <span class="sw-icon">🧮</span>
-          <div>
-            <span class="sw-name">ONETOOL</span>
-            <span class="sw-lang orange">C++</span>
-          </div>
-        </div>
-        <p class="sw-desc">
-          Comprehensive software for the analysis of family-based big data.
-          Supports a wide range of family-based association tests, heritability
-          estimation, and linkage analyses at biobank scale.
-        </p>
-        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.8rem;">
-          Song YE, Lee S, Park K et al. · <em>Bioinformatics</em> 2018
-        </p>
-        <div class="sw-links">
-          <a class="sw-link" href="https://github.com/SunghoWon/onetool" target="_blank">GitHub →</a>
-          <a class="sw-link" href="https://doi.org/10.1093/bioinformatics/bty180" target="_blank">Paper →</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="sec-footer">© 2026 BRIDGE Lab · Jeonbuk National University</div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
+<!-- PEOPLE (renamed from About) -->
+<section id="people">
   <div class="sec-inner wide">
     <p class="section-label">People</p>
     <h2 class="section-title">Our Team</h2>
     <div class="divider"></div>
 
     <p class="about-sub" style="margin-top:0;">Principal Investigator</p>
-    <!-- ③ Education moved inside PI card -->
     <div class="pi-card">
       <div class="pi-left">
         <div class="pi-avatar">👤</div>
@@ -586,7 +541,7 @@
 </section>
 
 <script>
-  const ids = ['home','overview','research','publications','software','about','contact'];
+  const ids = ['home','overview','research','publications','people','contact'];
 
   function navTo(id) {
     const el = document.getElementById(id);
@@ -602,37 +557,13 @@
     if (ab) ab.classList.add('active');
   }
 
+  /* IntersectionObserver: highlight nav on scroll */
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if(e.isIntersecting) setActive(e.target.id); });
   }, { threshold: 0.3 });
   ids.forEach(id => { const el = document.getElementById(id); if(el) obs.observe(el); });
 
-  let scrollLock = false;
-  window.addEventListener('wheel', (e) => {
-    if (scrollLock) return;
-    const navH = document.querySelector('nav').offsetHeight;
-    let cur = null;
-    for (const id of ids) {
-      const el = document.getElementById(id);
-      if (!el) continue;
-      const rect = el.getBoundingClientRect();
-      if (rect.top <= navH + 10 && rect.bottom > navH + 10) { cur = id; break; }
-    }
-    if (!cur) return;
-    const curEl  = document.getElementById(cur);
-    const curIdx = ids.indexOf(cur);
-    const rect   = curEl.getBoundingClientRect();
-    const scrolledPast = Math.max(0, navH - rect.top) / curEl.offsetHeight;
-    if (e.deltaY > 0 && scrolledPast > 0.72 && curIdx < ids.length - 1) {
-      scrollLock = true;
-      navTo(ids[curIdx + 1]);
-      setTimeout(() => { scrollLock = false; }, 900);
-    } else if (e.deltaY < 0 && rect.top > navH + 8 && curIdx > 0) {
-      scrollLock = true;
-      navTo(ids[curIdx - 1]);
-      setTimeout(() => { scrollLock = false; }, 900);
-    }
-  }, { passive:true });
+  /* ④ Auto-scroll removed — manual scroll only */
 </script>
 </body>
 </html>
