@@ -11,19 +11,36 @@
       --bg-dark:#0d1117; --bg-card:#161b22; --accent:#58a6ff; --accent2:#3fb950;
       --accent3:#f0883e; --text-main:#e6edf3; --text-muted:#8b949e; --border:#30363d; --nav-h:64px;
     }
-    html { scroll-behavior:smooth; }
-    body { font-family:'Open Sans',sans-serif; background:var(--bg-dark); color:var(--text-main); line-height:1.7; overflow-x:hidden; }
+    body.theme-slate {
+      --bg-dark:#0f1923; --bg-card:#182433; --accent:#7eb8f7; --accent2:#4ec9a0;
+      --accent3:#f0a05a; --text-main:#dce8f5; --text-muted:#7a9bb5; --border:#243650;
+    }
+    body.theme-forest {
+      --bg-dark:#0d1a10; --bg-card:#122016; --accent:#4ec994; --accent2:#a3d977;
+      --accent3:#f0c84a; --text-main:#d8f0e0; --text-muted:#6b9e7a; --border:#1e3a28;
+    }
+    body.theme-warm {
+      --bg-dark:#16100a; --bg-card:#201610; --accent:#f0a05a; --accent2:#e8c96a;
+      --accent3:#d96060; --text-main:#f5ede0; --text-muted:#a08060; --border:#3a2a18;
+    }
+    body.theme-purple {
+      --bg-dark:#0e0d1a; --bg-card:#161428; --accent:#a78bfa; --accent2:#60c8f0;
+      --accent3:#f472b6; --text-main:#e8e4f8; --text-muted:#8b80b8; --border:#2d2850;
+    }
 
-    /* NAV */
+    html { scroll-behavior:smooth; }
+    body { font-family:'Open Sans',sans-serif; background:var(--bg-dark); color:var(--text-main); line-height:1.7; overflow-x:hidden; transition:background .4s,color .4s; }
+
     nav {
       position:fixed; top:0; left:0; right:0; z-index:100; height:var(--nav-h);
       background:rgba(13,17,23,0.96); backdrop-filter:blur(8px);
       border-bottom:1px solid var(--border);
-      display:flex; align-items:center; justify-content:space-between; padding:0 6%;
+      display:flex; align-items:center; justify-content:space-between; padding:0 4%;
     }
-    .nav-logo { font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.2rem; color:var(--text-main); cursor:pointer; }
-    .nav-logo .eq { color:var(--accent); }
+    .nav-logo { font-family:'Montserrat',sans-serif; font-weight:700; font-size:1.2rem; color:var(--text-main); cursor:pointer; user-select:none; }
+    .nav-logo .eq  { color:var(--accent); }
     .nav-logo .gen { color:var(--accent2); }
+    .nav-right { display:flex; align-items:center; gap:0.4rem; }
     .nav-links { display:flex; gap:0.2rem; list-style:none; }
     .nav-links button {
       background:none; border:none; cursor:pointer; color:var(--text-muted);
@@ -31,9 +48,16 @@
       padding:0.45rem 1rem; border-radius:6px; transition:color .2s,background .2s;
     }
     .nav-links button:hover { color:var(--text-main); background:rgba(255,255,255,0.05); }
-    .nav-links button.active { color:var(--accent); background:rgba(88,166,255,0.1); }
+    .nav-links button.active { color:var(--accent); background:rgba(88,166,255,0.08); }
+    .theme-switcher { display:flex; gap:6px; margin-left:1rem; }
+    .theme-dot { width:16px; height:16px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:border-color .2s,transform .2s; }
+    .theme-dot:hover, .theme-dot.active { border-color:var(--text-main); transform:scale(1.2); }
+    .theme-dot[data-theme="default"] { background:linear-gradient(135deg,#58a6ff,#3fb950); }
+    .theme-dot[data-theme="slate"]   { background:linear-gradient(135deg,#7eb8f7,#4ec9a0); }
+    .theme-dot[data-theme="forest"]  { background:linear-gradient(135deg,#4ec994,#a3d977); }
+    .theme-dot[data-theme="warm"]    { background:linear-gradient(135deg,#f0a05a,#e8c96a); }
+    .theme-dot[data-theme="purple"]  { background:linear-gradient(135deg,#a78bfa,#f472b6); }
 
-    /* SECTIONS */
     section { min-height:100vh; display:flex; flex-direction:column; padding-top:var(--nav-h); }
     #overview     { background:var(--bg-card); border-top:1px solid var(--border); }
     #research     { background:var(--bg-dark); border-top:1px solid var(--border); }
@@ -56,13 +80,6 @@
         radial-gradient(ellipse at 25% 70%, rgba(63,185,80,0.08) 0%, transparent 55%),
         var(--bg-dark);
     }
-    .hero-eyebrow {
-      display:inline-flex; align-items:center; gap:0.5rem;
-      background:rgba(88,166,255,0.08); border:1px solid rgba(88,166,255,0.25);
-      border-radius:99px; padding:0.35rem 1.1rem; margin-bottom:1.6rem;
-      font-size:0.78rem; letter-spacing:0.14em; font-weight:700;
-      color:var(--accent); text-transform:uppercase;
-    }
     #home h1 { font-family:'Montserrat',sans-serif; font-size:clamp(2.4rem,5.5vw,4rem); font-weight:700; line-height:1.12; margin-bottom:1rem; }
     .hero-eq  { color:var(--accent); }
     .hero-gen { color:var(--accent2); }
@@ -70,38 +87,43 @@
     .hero-sub strong { color:var(--text-main); }
 
     .pill-row { display:flex; gap:0.7rem; flex-wrap:wrap; justify-content:center; margin-bottom:2.8rem; }
-    .pill { background:var(--bg-card); border:1px solid var(--border); border-radius:99px; padding:0.3rem 0.9rem; font-size:0.8rem; font-weight:600; color:var(--text-muted); }
-    .pill.blue   { border-color:rgba(88,166,255,0.4);  color:var(--accent); }
-    .pill.green  { border-color:rgba(63,185,80,0.4);   color:var(--accent2); }
-    .pill.orange { border-color:rgba(240,136,62,0.4);  color:var(--accent3); }
+    .pill { border-radius:99px; padding:0.32rem 1rem; font-size:0.82rem; font-weight:700; }
+    .pill.green  { background:rgba(63,185,80,0.15);  border:1px solid rgba(63,185,80,0.5);  color:var(--accent2); }
+    .pill.blue   { background:rgba(88,166,255,0.12); border:1px solid rgba(88,166,255,0.4); color:var(--accent); }
+    .pill.orange { background:rgba(240,136,62,0.12); border:1px solid rgba(240,136,62,0.4); color:var(--accent3); }
 
     .btn { display:inline-block; padding:0.72rem 1.8rem; border-radius:8px; font-weight:600; font-size:0.92rem; cursor:pointer; transition:all .2s; font-family:'Open Sans',sans-serif; border:none; text-decoration:none; }
     .btn-primary { background:var(--accent); color:#0d1117; }
-    .btn-primary:hover { background:#79c0ff; }
+    .btn-primary:hover { filter:brightness(1.15); }
     .btn-outline { border:1px solid var(--border); color:var(--text-main); background:none; margin-left:0.8rem; }
     .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
 
     /* OVERVIEW */
-    .overview-lead { font-size:1.08rem; color:var(--text-main); line-height:1.85; margin-bottom:1rem; }
-    .overview-body { font-size:0.95rem; color:var(--text-muted); line-height:1.9; }
+    .overview-lead { font-size:1.08rem; color:var(--text-main); line-height:1.85; margin-bottom:1.2rem; }
+    .overview-body { font-size:0.97rem; color:var(--text-muted); line-height:1.9; margin-bottom:1.2rem; }
     .overview-body strong { color:var(--text-main); }
-    .highlight-box {
-      margin-top:2rem; background:rgba(88,166,255,0.06);
-      border-left:3px solid var(--accent); border-radius:0 8px 8px 0;
-      padding:1.2rem 1.4rem; font-size:0.93rem; color:var(--text-muted); line-height:1.8;
-    }
-    .highlight-box strong { color:var(--accent); }
+    .overview-future { font-size:0.97rem; color:var(--text-muted); line-height:1.9; }
+    .overview-future strong { color:var(--accent3); }
 
-    /* RESEARCH CARDS */
+    /* RESEARCH */
     .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.4rem; }
     .card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.8rem; transition:border-color .25s,transform .25s; }
-    .card:hover { border-color:var(--accent); transform:translateY(-4px); }
+    .card:hover { transform:translateY(-4px); }
+    .card.c-green  { border-color:rgba(63,185,80,0.3); }
+    .card.c-green:hover  { border-color:var(--accent2); }
+    .card.c-blue   { border-color:rgba(88,166,255,0.3); }
+    .card.c-blue:hover   { border-color:var(--accent); }
+    .card.c-orange { border-style:dashed; border-color:rgba(240,136,62,0.4); }
+    .card.c-orange:hover { border-color:var(--accent3); }
     .card-icon { font-size:1.9rem; margin-bottom:0.8rem; }
-    .card h3 { font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:700; color:var(--accent); margin-bottom:0.5rem; }
+    .card h3 { font-family:'Montserrat',sans-serif; font-size:0.95rem; font-weight:700; margin-bottom:0.5rem; }
+    .card.c-green h3  { color:var(--accent2); }
+    .card.c-blue h3   { color:var(--accent); }
+    .card.c-orange h3 { color:var(--accent3); }
     .card p { font-size:0.87rem; color:var(--text-muted); line-height:1.75; }
     .tag { display:inline-block; font-size:0.7rem; font-weight:700; padding:0.1rem 0.5rem; border-radius:4px; margin-right:0.3rem; margin-bottom:0.6rem; }
-    .tag.blue   { background:rgba(88,166,255,0.12); color:var(--accent); }
     .tag.green  { background:rgba(63,185,80,0.12);  color:var(--accent2); }
+    .tag.blue   { background:rgba(88,166,255,0.12); color:var(--accent); }
     .tag.orange { background:rgba(240,136,62,0.12); color:var(--accent3); }
 
     /* PUBLICATIONS */
@@ -113,23 +135,17 @@
     .pub-year { display:inline-block; background:rgba(88,166,255,0.12); color:var(--accent); font-size:0.7rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:4px; margin-left:0.4rem; }
     .pub-me { font-weight:700; color:var(--text-main); }
     .pub-badge { display:inline-block; font-size:0.68rem; font-weight:700; padding:0.1rem 0.45rem; border-radius:4px; margin-left:0.4rem; vertical-align:middle; }
-    .pub-badge.first { background:rgba(63,185,80,0.12); color:var(--accent2); }
+    .pub-badge.first { background:rgba(63,185,80,0.12);  color:var(--accent2); }
     .pub-badge.corr  { background:rgba(240,136,62,0.12); color:var(--accent3); }
     .pub-badge.rev   { background:rgba(88,166,255,0.12); color:var(--accent); }
-
-    .scholar-btn {
-      display:inline-flex; align-items:center; gap:0.5rem;
-      margin-top:1.8rem; padding:0.65rem 1.6rem;
-      border:1px solid var(--accent); border-radius:8px;
-      color:var(--accent); font-size:0.88rem; font-weight:600;
-      text-decoration:none; transition:all .2s;
-    }
+    .scholar-btn { display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.8rem; padding:0.65rem 1.6rem; border:1px solid var(--accent); border-radius:8px; color:var(--accent); font-size:0.88rem; font-weight:600; text-decoration:none; transition:all .2s; }
     .scholar-btn:hover { background:rgba(88,166,255,0.1); }
 
     /* ABOUT */
     .about-sub { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--text-main); margin:2.2rem 0 1rem; padding-bottom:0.4rem; border-bottom:1px solid var(--border); }
     .pi-card { background:var(--bg-card); border:1px solid var(--accent); border-radius:12px; padding:1.8rem; display:grid; grid-template-columns:120px 1fr; gap:1.8rem; align-items:start; }
-    .pi-avatar { width:100px; height:100px; background:var(--border); border-radius:50%; margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:2.6rem; }
+    .pi-avatar { width:100px; height:100px; background:var(--border); border-radius:50%; margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:2.6rem; overflow:hidden; }
+    .pi-avatar img { width:100%; height:100%; object-fit:cover; }
     .pi-name { font-family:'Montserrat',sans-serif; font-size:1.1rem; font-weight:700; margin-bottom:0.15rem; }
     .pi-role { color:var(--accent); font-size:0.85rem; font-weight:600; margin-bottom:0.1rem; }
     .pi-inst { color:var(--text-muted); font-size:0.82rem; margin-bottom:0.9rem; }
@@ -137,13 +153,17 @@
     .pi-links { display:flex; gap:0.5rem; flex-wrap:wrap; }
     .pi-links a { padding:0.3rem 0.85rem; border:1px solid var(--border); border-radius:6px; font-size:0.78rem; font-weight:600; color:var(--text-muted); text-decoration:none; transition:all .2s; }
     .pi-links a:hover { border-color:var(--accent); color:var(--accent); }
-
-    .member-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; margin-top:0.4rem; }
+    .hiring-box { background:rgba(88,166,255,0.05); border:1px dashed rgba(88,166,255,0.4); border-radius:12px; padding:1.6rem 2rem; margin-bottom:1.4rem; }
+    .hiring-box h4 { font-family:'Montserrat',sans-serif; font-size:1rem; font-weight:700; color:var(--accent); margin-bottom:0.6rem; }
+    .hiring-box p { font-size:0.88rem; color:var(--text-muted); line-height:1.8; }
+    .hiring-box strong { color:var(--text-main); }
+    .hiring-box a { color:var(--accent); text-decoration:none; }
+    .hiring-box a:hover { text-decoration:underline; }
+    .member-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; margin-top:1rem; }
     .member-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:1.4rem 1rem; text-align:center; }
     .member-avatar { width:64px; height:64px; background:var(--border); border-radius:50%; margin:0 auto 0.8rem; display:flex; align-items:center; justify-content:center; font-size:1.5rem; }
     .member-card h4 { font-size:0.88rem; font-weight:700; margin-bottom:0.2rem; }
     .member-card p { font-size:0.77rem; color:var(--text-muted); }
-
     .info-list { list-style:none; }
     .info-list li { padding:0.6rem 0; border-bottom:1px solid var(--border); font-size:0.86rem; color:var(--text-muted); }
     .info-list li:last-child { border-bottom:none; }
@@ -170,27 +190,34 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <span class="nav-logo" onclick="scrollTo('home')">
+  <span class="nav-logo" onclick="navTo('home')">
     <span class="eq">Equi</span><span class="gen">Gen</span> Lab
   </span>
-  <ul class="nav-links">
-    <li><button onclick="scrollTo('overview')"     id="btn-overview">Overview</button></li>
-    <li><button onclick="scrollTo('research')"     id="btn-research">Research</button></li>
-    <li><button onclick="scrollTo('publications')" id="btn-publications">Publications</button></li>
-    <li><button onclick="scrollTo('about')"        id="btn-about">About</button></li>
-    <li><button onclick="scrollTo('contact')"      id="btn-contact">Contact</button></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><button onclick="navTo('overview')"     id="btn-overview">Overview</button></li>
+      <li><button onclick="navTo('research')"     id="btn-research">Research</button></li>
+      <li><button onclick="navTo('publications')" id="btn-publications">Publications</button></li>
+      <li><button onclick="navTo('about')"        id="btn-about">About</button></li>
+      <li><button onclick="navTo('contact')"      id="btn-contact">Contact</button></li>
+    </ul>
+    <div class="theme-switcher">
+      <div class="theme-dot active" data-theme="default" onclick="setTheme('default')" title="Default"></div>
+      <div class="theme-dot" data-theme="slate"   onclick="setTheme('slate')"   title="Slate Blue"></div>
+      <div class="theme-dot" data-theme="forest"  onclick="setTheme('forest')"  title="Forest"></div>
+      <div class="theme-dot" data-theme="warm"    onclick="setTheme('warm')"    title="Warm Dark"></div>
+      <div class="theme-dot" data-theme="purple"  onclick="setTheme('purple')"  title="Purple"></div>
+    </div>
+  </div>
 </nav>
 
-<!-- ══ HOME ══ -->
+<!-- HOME -->
 <section id="home">
-  <div class="hero-eyebrow">⚖️ &nbsp; Equitable Genomics &amp; Biomedical AI</div>
   <h1><span class="hero-eq">Equitable</span> AI<br/>for <span class="hero-gen">Genomic</span> Medicine</h1>
   <div class="pill-row">
+    <span class="pill green">Statistical Methods</span>
     <span class="pill blue">Medical Genomics</span>
-    <span class="pill">Statistical Methods</span>
     <span class="pill orange">Equitable AI</span>
   </div>
   <p class="hero-sub">
@@ -200,12 +227,12 @@
     across ancestry, sex, and population strata.
   </p>
   <div>
-    <button class="btn btn-primary" onclick="scrollTo('overview')">Our Research</button>
-    <button class="btn btn-outline"  onclick="scrollTo('contact')">Join Us</button>
+    <button class="btn btn-primary" onclick="navTo('overview')">Our Research</button>
+    <button class="btn btn-outline"  onclick="navTo('contact')">Join Us</button>
   </div>
 </section>
 
-<!-- ══ OVERVIEW ══ -->
+<!-- OVERVIEW -->
 <section id="overview">
   <div class="sec-inner">
     <p class="section-label">Overview</p>
@@ -221,41 +248,43 @@
       computational methods that are <strong>statistically rigorous, biologically grounded,
       and equitable by design</strong>.
     </p>
-    <div class="highlight-box">
-      🔭 <strong>Future Direction —</strong>
-      A central focus of our upcoming work is identifying and correcting
-      <strong>selection bias in biomedical AI</strong>: the underrepresentation of
+    <p class="overview-future">
+      Going forward, a central focus of our work will be identifying and correcting
+      <strong>selection bias in biomedical AI</strong> — the underrepresentation of
       non-European ancestries and sex-stratified variation in training data leads to
       inequitable model performance across diverse populations.
       We aim to build debiasing frameworks that close this gap.
-    </div>
+    </p>
   </div>
   <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
 </section>
 
-<!-- ══ RESEARCH ══ -->
+<!-- RESEARCH -->
 <section id="research">
   <div class="sec-inner wide">
     <p class="section-label">Research</p>
     <h2 class="section-title">Core Research Directions</h2>
     <div class="divider"></div>
     <div class="cards">
-      <div class="card">
+
+      <div class="card c-green">
+        <div class="card-icon">⚙️</div>
+        <span class="tag green">Algorithm</span><span class="tag green">Software</span>
+        <h3>Statistical Method Development</h3>
+        <p>Novel statistical algorithms for high-dimensional genomic data — differential
+        expression, batch correction, cell-type deconvolution — with emphasis on rigor
+        and biobank-scale scalability.</p>
+      </div>
+
+      <div class="card c-blue">
         <div class="card-icon">🧬</div>
         <span class="tag blue">GWAS</span><span class="tag blue">RNA-seq</span>
         <h3>Medical Genomics & Multi-Omics</h3>
         <p>Large-scale GWAS, bulk RNA-seq, and scRNA-seq analyses to dissect the genetic
         and transcriptomic underpinnings of complex traits across diverse human cohorts.</p>
       </div>
-      <div class="card">
-        <div class="card-icon">⚙️</div>
-        <span class="tag blue">Algorithm</span><span class="tag blue">Software</span>
-        <h3>Statistical Method Development</h3>
-        <p>Novel statistical algorithms for high-dimensional genomic data — differential
-        expression, batch correction, cell-type deconvolution — with emphasis on rigor
-        and biobank-scale scalability.</p>
-      </div>
-      <div class="card" style="border-style:dashed; border-color:rgba(240,136,62,0.5);">
+
+      <div class="card c-orange">
         <div class="card-icon">⚖️</div>
         <span class="tag orange">Future Direction</span>
         <h3>Fairness & Bias Correction in Biomedical AI</h3>
@@ -263,128 +292,80 @@
         with focus on ancestry, sex, and demographic underrepresentation.
         Goal: debiasing frameworks for equitable predictions across population strata.</p>
       </div>
+
     </div>
   </div>
   <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
 </section>
 
-<!-- ══ PUBLICATIONS ══ -->
+<!-- PUBLICATIONS -->
 <section id="publications">
   <div class="sec-inner">
     <p class="section-label">Publications</p>
     <h2 class="section-title">Selected Work</h2>
     <div class="divider"></div>
     <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:1.2rem;">
-      First-author and corresponding-author publications only.
-      &nbsp;<span class="pub-badge first">Co-First</span>
+      First-author and corresponding-author publications only. &nbsp;
+      <span class="pub-badge first">Co-First</span>
       <span class="pub-badge corr">Corresponding</span>
       <span class="pub-badge rev">Revision Invited</span>
     </p>
-
     <ul class="pub-list">
-
       <li>
-        <span class="pub-title">
-          COBRA: Cell-type-specific Orthogonal Batch effect Removal Algorithm in single cell RNA-sequencing data
-          <span class="pub-badge rev">Revision Invited</span>
-          <span class="pub-badge corr">Corresponding</span>
-        </span>
+        <span class="pub-title">COBRA: Cell-type-specific Orthogonal Batch effect Removal Algorithm in single cell RNA-sequencing data <span class="pub-badge rev">Revision Invited</span><span class="pub-badge corr">Corresponding</span></span>
         Seo S, Won S†, <span class="pub-me">Park K†</span><br/>
         <span class="pub-journal">Under Review</span>
       </li>
-
       <li>
-        <span class="pub-title">
-          Comparative Transcriptomic Profiling of Mesenchymal Stem Cells from Distinct Tissue Origins and Isolation Methods Highlights the Stability and Immunomodulatory Signature of Umbilical Cord-Derived Smumf Cells
-          <span class="pub-year">2026</span>
-          <span class="pub-badge first">Co-First</span>
-        </span>
+        <span class="pub-title">Comparative Transcriptomic Profiling of Mesenchymal Stem Cells from Distinct Tissue Origins and Isolation Methods Highlights the Stability and Immunomodulatory Signature of Umbilical Cord-Derived Smumf Cells <span class="pub-year">2026</span><span class="pub-badge first">Co-First</span></span>
         Lee MJ*, <span class="pub-me">Park K*</span>, Won S†, Jo CH†<br/>
         <span class="pub-journal">Tissue Engineering and Regenerative Medicine</span>
       </li>
-
       <li>
-        <span class="pub-title">
-          Novel Genetic Loci for Nontuberculous Mycobacterial Pulmonary Disease and Potential Protective Effect of Body Mass Index
-          <span class="pub-year">2025</span>
-          <span class="pub-badge first">Co-First</span>
-        </span>
+        <span class="pub-title">Novel Genetic Loci for Nontuberculous Mycobacterial Pulmonary Disease and Potential Protective Effect of Body Mass Index <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span></span>
         <span class="pub-me">Park K*</span>, Kim H*, Huh HJ* et al., Won S†, Jhun BW†, Won HH†<br/>
         <span class="pub-journal">American Journal of Respiratory and Critical Care Medicine</span>
       </li>
-
       <li>
-        <span class="pub-title">
-          rs762855 Single Nucleotide Polymorphism Modulates the Risk for Diffuse-Type Gastric Cancer in Females: A Genome-Wide Association Study in the Korean Population
-          <span class="pub-year">2025</span>
-          <span class="pub-badge first">Co-First</span>
-        </span>
-        <span class="pub-me">Park K*</span>, Shin CM* et al., Kim N†, Lee DH<br/>
+        <span class="pub-title">rs762855 Single Nucleotide Polymorphism Modulates the Risk for Diffuse-Type Gastric Cancer in Females: A Genome-Wide Association Study in the Korean Population <span class="pub-year">2025</span><span class="pub-badge first">Co-First</span></span>
+        <span class="pub-me">Park K*</span>, Shin CM* et al., Kim N†<br/>
         <span class="pub-journal">Gastric Cancer</span>
       </li>
-
       <li>
-        <span class="pub-title">
-          Single-Cell RNA Sequencing Reveals Transcriptional Changes in Circulating Immune Cells from Patients with Severe Asthma Induced by Biologics
-          <span class="pub-year">2024</span>
-          <span class="pub-badge first">Co-First</span>
-        </span>
+        <span class="pub-title">Single-Cell RNA Sequencing Reveals Transcriptional Changes in Circulating Immune Cells from Patients with Severe Asthma Induced by Biologics <span class="pub-year">2024</span><span class="pub-badge first">Co-First</span></span>
         <span class="pub-me">Park K*</span>, Lee JH* et al., Lee JS†, Won S†, Kim TB†<br/>
         <span class="pub-journal">Experimental &amp; Molecular Medicine</span>
       </li>
-
       <li>
-        <span class="pub-title">
-          Genome-Wide Association Study Implicates the Role of TBXAS1 in the Pathogenesis of Depressive Symptoms among the Korean Population
-          <span class="pub-year">2024</span>
-        </span>
+        <span class="pub-title">Genome-Wide Association Study Implicates the Role of TBXAS1 in the Pathogenesis of Depressive Symptoms among the Korean Population <span class="pub-year">2024</span></span>
         <span class="pub-me">Park K</span>, Do AR, Chung Y et al., Kim HN†, Ahn YM†, Won S†<br/>
         <span class="pub-journal">Translational Psychiatry</span>
       </li>
-
       <li>
-        <span class="pub-title">
-          rs2671655 Single Nucleotide Polymorphism Modulates the Risk for Gastric Cancer in Helicobacter pylori-Infected Individuals: A Genome-Wide Association Study in the Korean Population
-          <span class="pub-year">2022</span>
-          <span class="pub-badge first">Co-First</span>
-        </span>
+        <span class="pub-title">rs2671655 Single Nucleotide Polymorphism Modulates the Risk for Gastric Cancer in Helicobacter pylori-Infected Individuals: A Genome-Wide Association Study in the Korean Population <span class="pub-year">2022</span><span class="pub-badge first">Co-First</span></span>
         Shin CM*, <span class="pub-me">Park K*</span>, Kim N† et al.<br/>
         <span class="pub-journal">Gastric Cancer</span>
       </li>
-
       <li>
-        <span class="pub-title">
-          Genome-Wide Association Study of Non-Tuberculous Mycobacterial Pulmonary Disease
-          <span class="pub-year">2021</span>
-          <span class="pub-badge first">Co-First</span>
-        </span>
+        <span class="pub-title">Genome-Wide Association Study of Non-Tuberculous Mycobacterial Pulmonary Disease <span class="pub-year">2021</span><span class="pub-badge first">Co-First</span></span>
         Cho J*, <span class="pub-me">Park K*</span> et al., Won S†, Yim JJ†<br/>
         <span class="pub-journal">Thorax</span>
       </li>
-
       <li>
-        <span class="pub-title">
-          BALLI: Bartlett-Adjusted Likelihood-Based Linear Model Approach for Identifying Differentially Expressed Genes with RNA-seq Data
-          <span class="pub-year">2019</span>
-        </span>
+        <span class="pub-title">BALLI: Bartlett-Adjusted Likelihood-Based Linear Model Approach for Identifying Differentially Expressed Genes with RNA-seq Data <span class="pub-year">2019</span></span>
         <span class="pub-me">Park K</span>, An J, Gim J et al., Won S†<br/>
         <span class="pub-journal">BMC Genomics</span>
       </li>
-
     </ul>
-
     <p style="font-size:0.8rem; color:var(--text-muted); margin-top:1.2rem;">* equally contributed · † corresponding author</p>
-
-    <a class="scholar-btn"
-       href="https://scholar.google.com/citations?user=6CAaxTkAAAAJ&hl=ko"
-       target="_blank">
+    <a class="scholar-btn" href="https://scholar.google.com/citations?user=6CAaxTkAAAAJ&hl=ko" target="_blank">
       📄 &nbsp; View Full Publication List on Google Scholar →
     </a>
   </div>
   <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
 </section>
 
-<!-- ══ ABOUT ══ -->
+<!-- ABOUT -->
 <section id="about">
   <div class="sec-inner wide">
     <p class="section-label">People</p>
@@ -415,6 +396,18 @@
     </div>
 
     <p class="about-sub">Graduate Students &amp; Researchers</p>
+    <div class="hiring-box">
+      <h4>🚀 We Are Hiring!</h4>
+      <p>
+        We are actively looking for motivated <strong>MS and PhD students</strong> interested in any of the following areas:<br/><br/>
+        &nbsp;· <strong>Statistical genomics</strong> — GWAS, transcriptomics, multi-omics<br/>
+        &nbsp;· <strong>Computational method development</strong> — algorithms for high-dimensional biological data<br/>
+        &nbsp;· <strong>Fairness in biomedical AI</strong> — selection bias, representational equity across populations<br/><br/>
+        No prior genomics experience is required — curiosity, statistical thinking, and willingness to learn
+        are what matter most. Please send your CV and a brief statement of interest to
+        <a href="mailto:qkrrudxor147@gmail.com">qkrrudxor147@gmail.com</a>.
+      </p>
+    </div>
     <div class="member-grid">
       <div class="member-card" style="border-style:dashed; border-color:var(--accent);">
         <div class="member-avatar" style="background:rgba(88,166,255,0.1); color:var(--accent);">+</div>
@@ -457,12 +450,11 @@
       <li><span class="lbl">10-2757562 · Korea · 2025</span> Composition for predicting or diagnosing gastric cancer related to Helicobacter pylori infection comprising single nucleotide polymorphism detection agent</li>
       <li><span class="lbl">10-2883401 · Korea · 2025</span> Single nucleotide polymorphisms for the diagnosis of depression and uses thereof</li>
     </ul>
-
   </div>
   <div class="sec-footer">© 2025 EquiGen Lab · Jeonbuk National University</div>
 </section>
 
-<!-- ══ CONTACT ══ -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="sec-inner">
     <p class="section-label">Contact</p>
@@ -491,8 +483,12 @@
 <script>
   const ids = ['home','overview','research','publications','about','contact'];
 
-  function scrollTo(id) {
-    document.getElementById(id).scrollIntoView({ behavior:'smooth' });
+  function navTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const navH = document.querySelector('nav').offsetHeight;
+    const top  = el.getBoundingClientRect().top + window.pageYOffset - navH;
+    window.scrollTo({ top, behavior:'smooth' });
   }
 
   function setActive(id) {
@@ -506,6 +502,13 @@
   }, { threshold: 0.35 });
 
   ids.forEach(id => { const el = document.getElementById(id); if(el) obs.observe(el); });
+
+  function setTheme(theme) {
+    document.body.className = theme === 'default' ? '' : 'theme-' + theme;
+    document.querySelectorAll('.theme-dot').forEach(d => {
+      d.classList.toggle('active', d.dataset.theme === theme);
+    });
+  }
 </script>
 </body>
 </html>
